@@ -1,0 +1,2509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKATAN ALUMNI — Teknik Perkapalan UNDIP 2016</title>
+<!-- Favicon -->
+<link rel="icon" href="logo.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Quill Editor CSS -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<style>
+:root {
+  --navy: #0B2444;
+  --navy-mid: #163970;
+  --navy-dark: #051326;
+  --gold: #C8973A;
+  --gold-light: #E8B84B;
+  --gold-pale: #F5E6C8;
+  --cream: #FAF7F2;
+  --white: #FFFFFF;
+  --gray-100: #F4F4F5;
+  --gray-200: #E4E4E7;
+  --gray-400: #A1A1AA;
+  --gray-600: #52525B;
+  --gray-800: #27272A;
+  --danger: #DC2626;
+  --success: #16A34A;
+  --warning: #D97706;
+  --info: #2563EB;
+  --sidebar-w: 260px;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--cream); color: var(--gray-800); overflow-x: hidden; }
+img { max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: var(--font-body); }
+input, select, textarea { font-family: var(--font-body); }
+
+/* ===========================
+   UTILITIES
+=========================== */
+.hidden { display: none !important; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.text-gold { color: var(--gold); }
+.text-navy { color: var(--navy); }
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 50px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.03em; white-space: nowrap;
+}
+.badge-active { background: #DCFCE7; color: #15803D; }
+.badge-inactive { background: #FEF3C7; color: #B45309; }
+.badge-deleted { background: #FEE2E2; color: #B91C1C; }
+.badge-admin { background: #DBEAFE; color: #1D4ED8; }
+.badge-master { background: #EDE9FE; color: #7C3AED; }
+.badge-alumni { background: #F0FDF4; color: #166534; }
+
+/* ===========================
+   VIEWS SYSTEM
+=========================== */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ===========================
+   NAVBAR
+=========================== */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 68px;
+  background: rgba(11, 36, 68, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200, 151, 58, 0.25);
+}
+.navbar-logo {
+  display: flex; align-items: center; gap: 12px;
+}
+.navbar-logo .logo-icon {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1rem; font-weight: 900; color: var(--navy);
+}
+.navbar-logo img { width: 38px; height: 38px; border-radius: 8px; object-fit: cover; }
+.navbar-logo .logo-text { color: var(--white); }
+.navbar-logo .logo-text span { display: block; font-size: 0.65rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+.navbar-logo .logo-text strong { font-size: 0.88rem; font-weight: 600; }
+.navbar-links { display: flex; gap: 0.25rem; }
+.navbar-links a {
+  color: rgba(255,255,255,0.75); font-size: 0.85rem; padding: 6px 14px;
+  border-radius: 6px; transition: all 0.2s;
+}
+.navbar-links a:hover, .navbar-links a.active { color: var(--white); background: rgba(200,151,58,0.18); }
+.navbar-actions { display: flex; gap: 0.6rem; align-items: center; }
+.btn-nav-login {
+  padding: 7px 20px; border-radius: 8px; font-size: 0.82rem; font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.25); color: var(--white);
+  background: transparent; transition: all 0.2s;
+}
+.btn-nav-login:hover { background: rgba(255,255,255,0.1); }
+.btn-nav-register {
+  padding: 7px 20px; border-radius: 8px; font-size: 0.82rem; font-weight: 600;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy); border: none; transition: all 0.2s;
+}
+.btn-nav-register:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(200,151,58,0.4); }
+
+.mobile-toggle {
+  display: none; background: none; border: none; color: white;
+  font-size: 1.5rem; cursor: pointer;
+}
+
+/* ===========================
+   LANDING PAGE
+=========================== */
+.landing-hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 68px;
+}
+.hero-left {
+  padding: 5rem 3rem 4rem 4rem;
+  background: var(--cream);
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-left::before {
+  content: 'TEKNIK\APERKAPALAN';
+  white-space: pre;
+  position: absolute; top: 8%; left: -2%;
+  font-family: var(--font-display); font-size: 8rem; font-weight: 900;
+  color: rgba(11,36,68,0.04); line-height: 1; z-index: 0; pointer-events: none;
+  letter-spacing: -0.02em;
+}
+.hero-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-label::before { content: ''; display: block; width: 28px; height: 2px; background: var(--gold); }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 900; line-height: 1.12;
+  color: var(--navy); margin-bottom: 1.5rem; position: relative; z-index: 1;
+}
+.hero-title span { color: var(--gold); display: block; }
+.hero-subtitle {
+  font-size: 0.92rem; color: var(--gray-600); line-height: 1.75;
+  max-width: 400px; margin-bottom: 2.5rem;
+}
+.hero-cta-group { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 26px; border-radius: 10px; font-size: 0.88rem; font-weight: 600;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  color: var(--white); border: none; transition: all 0.25s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,36,68,0.3); }
+.btn-gold {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 26px; border-radius: 10px; font-size: 0.88rem; font-weight: 600;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy); border: none; transition: all 0.25s;
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(200,151,58,0.45); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 26px; border-radius: 10px; font-size: 0.88rem; font-weight: 600;
+  border: 1.5px solid var(--navy); color: var(--navy);
+  background: transparent; transition: all 0.25s;
+}
+.btn-outline:hover { background: var(--navy); color: var(--white); }
+.hero-stats { display: flex; gap: 2rem; }
+.stat-item { text-align: center; }
+.stat-num { font-family: var(--font-display); font-size: 1.6rem; font-weight: 900; color: var(--navy); }
+.stat-label { font-size: 0.7rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+.hero-divider { width: 1px; background: var(--gray-200); }
+
+.hero-right {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--navy) 0%, #0d2d5a 60%, #1a4a8a 100%);
+}
+.hero-right-img {
+  width: 100%; height: 100%; object-fit: cover; opacity: 0.35;
+  position: absolute; top: 0; left: 0;
+}
+.hero-right-overlay {
+  position: relative; z-index: 2;
+  height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 3rem;
+}
+.hero-university-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(200,151,58,0.35);
+  border-radius: 16px; padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--white);
+}
+.hero-university-card h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 0.4rem; }
+.hero-university-card p { font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+.hero-social { display: flex; gap: 10px; }
+.social-btn {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: rgba(200,151,58,0.2); border: 1px solid rgba(200,151,58,0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 0.75rem; cursor: pointer; transition: all 0.2s;
+}
+.social-btn:hover { background: var(--gold); color: var(--navy); }
+.hero-dots {
+  position: absolute; top: 2rem; right: 2rem; z-index: 2;
+  display: grid; grid-template-columns: repeat(5,8px); gap: 6px;
+}
+.hero-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(200,151,58,0.3); }
+.hero-dots span:nth-child(odd) { background: rgba(200,151,58,0.55); }
+
+/* ===========================
+   NEWS SECTION
+=========================== */
+.section-news {
+  padding: 5rem 4rem;
+  background: var(--white);
+}
+.section-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 3rem;
+}
+.section-title-group {}
+.section-eyebrow {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-eyebrow::before { content: ''; display: block; width: 20px; height: 2px; background: var(--gold); }
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 800; color: var(--navy);
+}
+.btn-see-all {
+  padding: 9px 20px; border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+  border: 1.5px solid var(--navy); color: var(--navy); background: transparent;
+  transition: all 0.2s; cursor: pointer;
+}
+.btn-see-all:hover { background: var(--navy); color: var(--white); }
+
+.news-grid {
+  display: grid; grid-template-columns: 1.8fr 1fr 1fr; gap: 1.5rem;
+}
+.news-card {
+  border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--gray-200); background: var(--white);
+  transition: all 0.25s; cursor: pointer;
+}
+.news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(11,36,68,0.1); border-color: var(--gold-pale); }
+.news-card.featured { grid-row: span 2; }
+.news-img {
+  width: 100%; object-fit: cover;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  position: relative; overflow: hidden;
+}
+.news-img-placeholder {
+  width: 100%; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  color: rgba(255,255,255,0.2); font-family: var(--font-display);
+  font-size: 2rem; font-weight: 900; letter-spacing: -0.02em;
+}
+.news-card.featured .news-img-placeholder { height: 300px; }
+.news-card:not(.featured) .news-img-placeholder { height: 160px; }
+.news-body { padding: 1.2rem 1.3rem 1.4rem; }
+.news-cat {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+}
+.news-title {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700; line-height: 1.35; color: var(--navy); margin-bottom: 0.5rem;
+}
+.news-card.featured .news-title { font-size: 1.3rem; }
+.news-excerpt { font-size: 0.8rem; color: var(--gray-600); line-height: 1.6; margin-bottom: 0.8rem; }
+.news-meta { display: flex; align-items: center; gap: 0.75rem; font-size: 0.72rem; color: var(--gray-400); }
+.news-meta span::before { content: '·'; margin-right: 0.75rem; }
+.news-meta span:first-child::before { content: ''; margin: 0; }
+
+/* ===========================
+   SEARCH SECTION
+=========================== */
+.section-search-public {
+  padding: 5rem 4rem;
+  background: var(--cream);
+}
+.search-hero-box {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  border-radius: 20px; padding: 3.5rem 4rem;
+  color: var(--white); position: relative; overflow: hidden;
+}
+.search-hero-box::before {
+  content: ''; position: absolute;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: rgba(200,151,58,0.07);
+  top: -150px; right: -100px; pointer-events: none;
+}
+.search-hero-title {
+  font-family: var(--font-display); font-size: 1.7rem; font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.search-hero-sub { font-size: 0.88rem; color: rgba(255,255,255,0.65); margin-bottom: 2rem; }
+.search-bar {
+  display: flex; gap: 0.75rem;
+}
+.search-input-wrap { flex: 1; position: relative; }
+.search-input-wrap svg {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--gray-400); width: 18px; height: 18px;
+}
+.search-input {
+  width: 100%; padding: 12px 14px 12px 42px;
+  border-radius: 10px; border: none; background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white); font-size: 0.9rem; outline: none;
+}
+.search-input::placeholder { color: rgba(255,255,255,0.4); }
+.search-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.15); }
+.btn-search {
+  padding: 12px 28px; border-radius: 10px; font-size: 0.88rem; font-weight: 600;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy); border: none; transition: all 0.2s; cursor: pointer;
+}
+.btn-search:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(200,151,58,0.5); }
+.search-results { margin-top: 2rem; }
+.search-result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.alumni-card {
+  background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 12px;
+  padding: 1.2rem; color: var(--white);
+  transition: all 0.2s; cursor: pointer;
+}
+.alumni-card:hover { border-color: rgba(200,151,58,0.5); background: rgba(255,255,255,0.12); }
+.alumni-card-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; color: var(--navy);
+  font-size: 1rem; margin-bottom: 0.75rem;
+}
+.alumni-card h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 0.25rem; }
+.alumni-card p { font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+.alumni-card .tag {
+  display: inline-block; margin-top: 0.6rem; padding: 3px 10px; border-radius: 20px;
+  font-size: 0.7rem; font-weight: 600; background: rgba(200,151,58,0.2);
+  color: var(--gold-light); border: 1px solid rgba(200,151,58,0.3);
+}
+
+/* ===========================
+   LOGIN PAGE
+=========================== */
+.login-wrap {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.login-left {
+  background: linear-gradient(160deg, var(--navy) 0%, #0d2d5a 60%, #1a4a8a 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 3rem; position: relative; overflow: hidden;
+}
+.login-left::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8973A' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.login-brand { text-align: center; position: relative; z-index: 1; color: var(--white); }
+.login-brand .brand-icon {
+  width: 72px; height: 72px; border-radius: 18px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: var(--navy);
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 12px 30px rgba(200,151,58,0.4);
+}
+.login-brand img.logo {
+  width: 72px; height: 72px; border-radius: 18px; object-fit: cover;
+  margin: 0 auto 1.5rem; display: block; box-shadow: 0 12px 30px rgba(200,151,58,0.4);
+}
+.login-brand h1 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem; }
+.login-brand p { font-size: 0.85rem; color: rgba(255,255,255,0.6); max-width: 260px; line-height: 1.6; margin: 0 auto; }
+.login-deco {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 180px; z-index: 0;
+  background: linear-gradient(transparent, rgba(200,151,58,0.05));
+}
+
+.login-right {
+  background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  padding: 3rem;
+}
+.login-form-box { width: 100%; max-width: 400px; }
+.login-form-box h2 {
+  font-family: var(--font-display); font-size: 1.7rem; font-weight: 800;
+  color: var(--navy); margin-bottom: 0.4rem;
+}
+.login-form-box p { font-size: 0.85rem; color: var(--gray-600); margin-bottom: 2rem; }
+.form-group { margin-bottom: 1.2rem; }
+.form-label {
+  display: block; font-size: 0.8rem; font-weight: 600;
+  color: var(--gray-700, #3F3F46); margin-bottom: 0.4rem;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 11px 14px; border-radius: 10px;
+  border: 1.5px solid var(--gray-200); background: var(--gray-100);
+  font-size: 0.88rem; color: var(--gray-800); outline: none;
+  transition: all 0.2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--navy); background: var(--white);
+  box-shadow: 0 0 0 3px rgba(11,36,68,0.08);
+}
+.form-textarea { resize: vertical; min-height: 80px; }
+.btn-full {
+  width: 100%; padding: 13px; border-radius: 10px; font-size: 0.9rem; font-weight: 600;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  color: var(--white); border: none; cursor: pointer; transition: all 0.25s; margin-top: 0.5rem;
+}
+.btn-full:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(11,36,68,0.3); }
+.login-error {
+  background: #FEE2E2; border: 1px solid #FECACA; color: #B91C1C;
+  padding: 10px 14px; border-radius: 8px; font-size: 0.82rem;
+  margin-bottom: 1rem; display: none;
+}
+.login-error.show { display: block; }
+.login-back {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; color: var(--gray-600); cursor: pointer;
+  margin-bottom: 2rem; transition: color 0.2s;
+}
+.login-back:hover { color: var(--navy); }
+
+/* ===========================
+   REGISTRATION FORM
+=========================== */
+.register-wrap {
+  min-height: 100vh; background: var(--cream); padding-top: 68px;
+}
+.register-container { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem; }
+.register-header { margin-bottom: 2.5rem; }
+.register-header .eyebrow {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.register-header .eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--gold); }
+.register-header h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--navy); }
+.form-card {
+  background: var(--white); border-radius: 16px; padding: 2rem 2.5rem;
+  border: 1px solid var(--gray-200); margin-bottom: 1.5rem;
+}
+.form-card h3 {
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 1.5rem; padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--gold-pale); display: flex; align-items: center; gap: 10px;
+}
+.form-card h3 span {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 0.75rem; font-weight: 700;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.form-grid.cols-1 { grid-template-columns: 1fr; }
+.form-full { grid-column: 1 / -1; }
+.radio-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.radio-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+  border-radius: 8px; border: 1.5px solid var(--gray-200);
+  cursor: pointer; transition: all 0.2s; background: var(--gray-100);
+}
+.radio-item:hover { border-color: var(--navy); background: rgba(11,36,68,0.04); }
+.radio-item input[type="radio"] { accent-color: var(--navy); }
+.radio-item.selected { border-color: var(--navy); background: rgba(11,36,68,0.05); }
+.radio-label { font-size: 0.85rem; color: var(--gray-800); font-weight: 500; }
+.checkbox-item {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  border-radius: 8px; border: 1.5px solid var(--gold-pale);
+  cursor: pointer; background: var(--gold-pale); color: var(--navy);
+  font-size: 0.85rem; font-weight: 500;
+}
+.checkbox-item input[type="checkbox"] { accent-color: var(--navy); width: 16px; height: 16px; }
+.form-submit {
+  padding: 14px 40px; border-radius: 10px; font-size: 0.9rem; font-weight: 600;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  color: var(--white); border: none; cursor: pointer; transition: all 0.25s;
+}
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(11,36,68,0.3); }
+.success-toast {
+  background: #DCFCE7; border: 1px solid #86EFAC; color: #166534;
+  padding: 14px 18px; border-radius: 10px; font-size: 0.88rem;
+  font-weight: 500; margin-bottom: 1.5rem; display: none; align-items: center; gap: 10px;
+}
+.success-toast.show { display: flex; }
+.foto-upload-box {
+  border: 2px dashed var(--gray-200); border-radius: 12px; padding: 1.5rem; text-align: center;
+  cursor: pointer; background: var(--gray-100); transition: all 0.2s; position: relative; overflow: hidden;
+}
+.foto-upload-box:hover { border-color: var(--navy); background: rgba(11,36,68,0.04); }
+.foto-upload-box img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; display: none; margin-left: auto; margin-right: auto; }
+
+
+/* ===========================
+   CPANEL LAYOUT
+=========================== */
+.cpanel-wrap { display: flex; min-height: 100vh; }
+.cpanel-sidebar {
+  width: var(--sidebar-w); background: var(--navy);
+  position: fixed; top: 0; left: 0; bottom: 0;
+  display: flex; flex-direction: column; z-index: 50;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(200,151,58,0.15);
+}
+.sidebar-logo .logo-inner {
+  display: flex; align-items: center; gap: 10px;
+}
+.sidebar-logo img { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; }
+.sidebar-logo .logo-info { color: var(--white); }
+.sidebar-logo .logo-info small { display: block; font-size: 0.6rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+.sidebar-logo .logo-info strong { display: block; font-size: 0.8rem; }
+.sidebar-user {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 0.5rem;
+}
+.sidebar-user-info { display: flex; align-items: center; gap: 10px; }
+.sidebar-user-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--navy); font-size: 0.85rem;
+}
+.sidebar-user-name { color: var(--white); font-size: 0.82rem; font-weight: 600; }
+.sidebar-user-role { font-size: 0.68rem; color: rgba(200,151,58,0.8); text-transform: uppercase; letter-spacing: 0.08em; }
+.sidebar-nav { flex: 1; padding: 0.5rem 0.75rem; }
+.sidebar-section-label {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  padding: 1rem 0.75rem 0.4rem;
+}
+.sidebar-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 8px; margin-bottom: 2px;
+  color: rgba(255,255,255,0.65); font-size: 0.83rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.sidebar-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+.sidebar-link:hover { background: rgba(255,255,255,0.07); color: var(--white); }
+.sidebar-link.active { background: rgba(200,151,58,0.18); color: var(--gold-light); }
+.sidebar-link .badge-count {
+  margin-left: auto; background: var(--gold); color: var(--navy);
+  font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 10px;
+}
+.sidebar-bottom {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.btn-logout {
+  width: 100%; padding: 9px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 500;
+  background: rgba(220,38,38,0.12); color: #FCA5A5; border: 1px solid rgba(220,38,38,0.2);
+  cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; justify-content: center;
+}
+.btn-logout:hover { background: rgba(220,38,38,0.2); color: #FEE2E2; }
+
+.cpanel-main {
+  margin-left: var(--sidebar-w);
+  flex: 1; background: var(--gray-100); min-height: 100vh;
+}
+.cpanel-topbar {
+  background: var(--white); border-bottom: 1px solid var(--gray-200);
+  padding: 0 2rem; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 40;
+}
+.topbar-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--navy); }
+.topbar-right { display: flex; align-items: center; gap: 1rem; }
+.topbar-search {
+  position: relative;
+}
+.topbar-search input {
+  padding: 8px 14px 8px 36px; border-radius: 8px;
+  border: 1.5px solid var(--gray-200); background: var(--gray-100);
+  font-size: 0.82rem; width: 220px; outline: none; transition: all 0.2s;
+}
+.topbar-search input:focus { border-color: var(--navy); background: var(--white); width: 260px; }
+.topbar-search svg {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  width: 15px; height: 15px; color: var(--gray-400);
+}
+.topbar-notif {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--gray-100); border: 1px solid var(--gray-200);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative; color: var(--gray-600);
+}
+.topbar-notif-dot {
+  position: absolute; top: 6px; right: 6px;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--danger);
+  border: 1.5px solid var(--white);
+}
+
+.cpanel-content { padding: 2rem; }
+.cpanel-panel { display: none; }
+.cpanel-panel.active { display: block; }
+
+/* Dashboard cards */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2rem; }
+.stat-card {
+  background: var(--white); border-radius: 14px; padding: 1.4rem 1.5rem;
+  border: 1px solid var(--gray-200); position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.stat-card:nth-child(1)::before { background: linear-gradient(90deg, var(--navy), var(--navy-mid)); }
+.stat-card:nth-child(2)::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+.stat-card:nth-child(3)::before { background: linear-gradient(90deg, #059669, #34D399); }
+.stat-card:nth-child(4)::before { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+.stat-card-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1rem; font-size: 1.1rem;
+}
+.stat-card:nth-child(1) .stat-card-icon { background: rgba(11,36,68,0.08); color: var(--navy); }
+.stat-card:nth-child(2) .stat-card-icon { background: rgba(200,151,58,0.12); color: var(--gold); }
+.stat-card:nth-child(3) .stat-card-icon { background: rgba(5,150,105,0.1); color: #059669; }
+.stat-card:nth-child(4) .stat-card-icon { background: rgba(124,58,237,0.1); color: #7C3AED; }
+.stat-card-num { font-family: var(--font-display); font-size: 2rem; font-weight: 900; color: var(--navy); }
+.stat-card-label { font-size: 0.78rem; color: var(--gray-600); margin-top: 0.2rem; }
+.stat-card-sub { font-size: 0.72rem; color: var(--gray-400); margin-top: 0.3rem; }
+
+/* Table */
+.table-card {
+  background: var(--white); border-radius: 14px; padding: 1.5rem;
+  border: 1px solid var(--gray-200); margin-bottom: 1.5rem;
+}
+.table-card-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;
+}
+.table-card-title {
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--navy);
+}
+.table-card-actions { display: flex; gap: 0.6rem; }
+.btn-sm {
+  padding: 7px 16px; border-radius: 7px; font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; border: none;
+}
+.btn-sm-primary { background: var(--navy); color: var(--white); }
+.btn-sm-primary:hover { background: var(--navy-mid); }
+.btn-sm-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--navy); }
+.btn-sm-outline { background: transparent; border: 1.5px solid var(--gray-200) !important; color: var(--gray-600); }
+.btn-sm-outline:hover { border-color: var(--navy) !important; color: var(--navy); }
+.btn-sm-danger { background: #FEE2E2; color: var(--danger); border: none; }
+.btn-sm-danger:hover { background: #FECACA; }
+
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  padding: 10px 14px; text-align: left; font-size: 0.73rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--gray-400); border-bottom: 1.5px solid var(--gray-200);
+}
+tbody tr { border-bottom: 1px solid var(--gray-100); transition: background 0.15s; }
+tbody tr:hover { background: var(--gray-100); }
+tbody tr:last-child { border-bottom: none; }
+tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
+.td-user { display: flex; align-items: center; gap: 10px; }
+.td-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--white); font-size: 0.72rem; flex-shrink: 0;
+}
+.td-name { font-weight: 600; font-size: 0.83rem; }
+.td-sub { font-size: 0.72rem; color: var(--gray-400); }
+.action-btn {
+  padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 600;
+  cursor: pointer; border: none; transition: all 0.15s; margin-right: 4px;
+}
+.action-view { background: #DBEAFE; color: #1D4ED8; }
+.action-view:hover { background: #BFDBFE; }
+.action-edit { background: #FEF3C7; color: #B45309; }
+.action-edit:hover { background: #FDE68A; }
+.action-delete { background: #FEE2E2; color: #B91C1C; }
+.action-delete:hover { background: #FECACA; }
+.table-pagination {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);
+}
+.table-pagination-info { font-size: 0.78rem; color: var(--gray-400); }
+.table-pagination-btns { display: flex; gap: 0.4rem; }
+.page-btn {
+  padding: 5px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 500;
+  border: 1.5px solid var(--gray-200); background: var(--white); cursor: pointer;
+  transition: all 0.15s; color: var(--gray-600);
+}
+.page-btn:hover, .page-btn.active { border-color: var(--navy); color: var(--navy); background: rgba(11,36,68,0.05); }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 200; display: none; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: var(--white); border-radius: 16px;
+  width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto;
+  padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;
+}
+.modal-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+.modal-close {
+  width: 32px; height: 32px; border-radius: 8px; background: var(--gray-100);
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--gray-600); transition: all 0.15s;
+}
+.modal-close:hover { background: var(--gray-200); }
+
+/* Article Editor */
+.article-editor-img {
+  width: 100%; height: 200px; border-radius: 10px;
+  border: 2px dashed var(--gray-200); display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px; cursor: pointer; margin-bottom: 1rem;
+  transition: all 0.2s; background: var(--gray-100);
+  overflow: hidden; position: relative;
+}
+.article-editor-img:hover { border-color: var(--navy); background: rgba(11,36,68,0.04); }
+.article-editor-img img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.article-editor-img .img-placeholder { color: var(--gray-400); font-size: 0.82rem; text-align: center; }
+
+/* Filter bar */
+.filter-bar {
+  display: flex; gap: 0.75rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.filter-select {
+  padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--gray-200);
+  background: var(--white); font-size: 0.8rem; color: var(--gray-800);
+  outline: none; cursor: pointer;
+}
+.filter-input {
+  padding: 8px 12px; border-radius: 8px; border: 1.5px solid var(--gray-200);
+  background: var(--white); font-size: 0.8rem; color: var(--gray-800);
+  outline: none; flex: 1; min-width: 200px;
+}
+.filter-input:focus, .filter-select:focus { border-color: var(--navy); }
+
+/* Alumni Profile View */
+.alumni-profile-card {
+  background: var(--white); border-radius: 16px; padding: 2rem;
+  border: 1px solid var(--gray-200);
+}
+.alumni-profile-header {
+  display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
+  padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-200);
+}
+.alumni-profile-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--white);
+  flex-shrink: 0;
+}
+.alumni-profile-info h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--navy); }
+.alumni-profile-info p { font-size: 0.85rem; color: var(--gray-600); margin-top: 0.3rem; }
+.profile-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.detail-item {}
+.detail-item label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-400); display: block; margin-bottom: 0.25rem; }
+.detail-item p { font-size: 0.88rem; color: var(--gray-800); font-weight: 500; }
+
+/* Tabs */
+.tab-group { display: flex; gap: 0.35rem; border-bottom: 2px solid var(--gray-200); margin-bottom: 1.5rem; }
+.tab-btn {
+  padding: 10px 20px; font-size: 0.83rem; font-weight: 600;
+  border: none; background: transparent; cursor: pointer;
+  color: var(--gray-600); border-bottom: 2px solid transparent;
+  margin-bottom: -2px; transition: all 0.2s; border-radius: 6px 6px 0 0;
+}
+.tab-btn:hover { color: var(--navy); background: rgba(11,36,68,0.04); }
+.tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
+
+/* Custom Footer */
+.landing-footer {
+  background: var(--navy-dark); 
+  color: var(--white);
+  padding: 5rem 4rem 2rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+.footer-contact-label { 
+  font-size: 0.75rem; font-weight: 700; color: var(--gold); 
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; 
+}
+.footer-heading { 
+  font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; 
+  line-height: 1.2; margin-bottom: 2rem; max-width: 400px; 
+}
+.footer-btn { 
+  display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; 
+  background: var(--white); color: var(--navy); border-radius: 30px; 
+  font-weight: 600; font-size: 0.9rem; transition: all 0.2s; border: none; cursor: pointer;
+}
+.footer-btn:hover { background: var(--gold-pale); }
+.footer-email-box { 
+  display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; 
+  background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.2); 
+  border-radius: 30px; font-size: 0.85rem; margin-top: 1rem; color: rgba(255,255,255,0.9);
+}
+.footer-links-container { 
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; 
+}
+.footer-links-col h4 { 
+  font-size: 0.75rem; font-weight: 700; color: var(--gold); 
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; 
+}
+.footer-links-col ul { list-style: none; padding: 0; }
+.footer-links-col li { margin-bottom: 1rem; }
+.footer-links-col a { color: rgba(255,255,255,0.8); font-size: 0.85rem; transition: color 0.2s; text-decoration: none;}
+.footer-links-col a:hover { color: var(--gold-light); }
+.footer-bottom { 
+  display: flex; justify-content: space-between; align-items: center; 
+  padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 1rem; 
+}
+.footer-copyright { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.05em; }
+.footer-socials { display: flex; gap: 1.25rem; }
+.footer-socials a { color: var(--white); transition: color 0.2s; opacity: 0.8;}
+.footer-socials a:hover { color: var(--gold); opacity: 1;}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .landing-hero { grid-template-columns: 1fr; }
+  .hero-right { min-height: 350px; }
+  .news-grid { grid-template-columns: 1fr; }
+  .login-wrap { grid-template-columns: 1fr; }
+  .login-left { display: none; }
+  .cpanel-sidebar { transform: translateX(-100%); }
+  .cpanel-main { margin-left: 0; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-up { animation: fadeUp 0.5s ease forwards; }
+.animate-in { animation: fadeIn 0.3s ease forwards; }
+
+/* SVG Icons helper */
+.icon { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+</style>
+</head>
+<body>
+
+<!-- ===========================
+     NAVBAR
+=========================== -->
+<nav class="navbar" id="mainNav">
+  <div class="navbar-logo">
+    <img src="logo.png" alt="Logo TP">
+    <div class="logo-text">
+      <span>IKATAN ALUMNI · UNDIP 2016</span>
+      <strong>Teknik Perkapalan</strong>
+    </div>
+  </div>
+  <div class="navbar-links">
+    <a href="#" onclick="showView('landing')" class="active" id="nav-home">Beranda</a>
+    <a href="#" onclick="showView('search-public')" id="nav-search">Cari Alumni</a>
+    <a href="#" onclick="scrollToNews()" id="nav-news">Berita</a>
+    <a href="#" onclick="showView('register')" id="nav-daftar">Daftar Alumni</a>
+  </div>
+  <div class="navbar-actions" id="navActions">
+    <button class="btn-nav-login" onclick="showView('login')">Masuk</button>
+    <button class="btn-nav-register" onclick="showView('register')">Daftar Sekarang</button>
+  </div>
+</nav>
+
+<!-- ===========================
+     VIEW: LANDING
+=========================== -->
+<div class="view active" id="view-landing">
+  <!-- Hero -->
+  <div class="landing-hero">
+    <div class="hero-left animate-up">
+      <div class="hero-label">Ikatan Alumni Teknik Perkapalan UNDIP</div>
+      <h1 class="hero-title">
+        Terhubung,<br>Berkembang,<br>
+        <span>&amp; Berkarya</span>
+      </h1>
+      <p class="hero-subtitle">Portal resmi alumni Teknik Perkapalan Universitas Diponegoro Angkatan 2016. Temukan rekan, update karir, dan ikuti perkembangan komunitas.</p>
+      <div class="hero-cta-group">
+        <button class="btn-gold" onclick="showView('register')">Daftar Sebagai Alumni ↗</button>
+        <button class="btn-outline" onclick="showView('search-public')">Cari Alumni</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num" id="statTotal">0</div>
+          <div class="stat-label">Alumni Terdaftar</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">2016</div>
+          <div class="stat-label">Angkatan</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num" id="statProv">0</div>
+          <div class="stat-label">Provinsi</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img class="hero-right-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Undip-ft.jpg/640px-Undip-ft.jpg" alt="UNDIP" onerror="this.style.display='none'">
+      <div class="hero-dots">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="hero-right-overlay">
+        <div class="hero-university-card">
+          <h3>Universitas Diponegoro</h3>
+          <p>Teknik Perkapalan — Fakultas Teknik<br>Angkatan 2016 · Semarang, Jawa Tengah</p>
+          <div class="hero-social" style="margin-top:1rem">
+            <div class="social-btn">fb</div>
+            <div class="social-btn">ig</div>
+            <div class="social-btn">yt</div>
+            <div class="social-btn">wa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- News Section -->
+  <div class="section-news" id="section-news">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-eyebrow">Informasi Terkini</div>
+        <h2 class="section-title">Berita &amp; Artikel Alumni</h2>
+      </div>
+      <button class="btn-see-all" onclick="showView('login')">Lihat Semua →</button>
+    </div>
+    <div class="news-grid" id="newsGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- Public Search Section -->
+  <div class="section-search-public">
+    <div class="search-hero-box">
+      <h2 class="search-hero-title">🔍 Cari Alumni Teknik Perkapalan 2016</h2>
+      <p class="search-hero-sub">Temukan rekan alumni berdasarkan nama, domisili, atau bidang pekerjaan</p>
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:rgba(255,255,255,0.4)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="search-input" type="text" placeholder="Cari nama, kota, atau pekerjaan..." id="publicSearchInput" oninput="searchAlumniPublic()">
+        </div>
+        <button class="btn-search" onclick="searchAlumniPublic()">Cari</button>
+      </div>
+      <div class="search-results" id="publicSearchResults"></div>
+    </div>
+  </div>
+
+  <!-- Footer (Desain Baru) -->
+  <footer class="landing-footer">
+    <div class="footer-grid">
+      <div class="footer-left">
+        <div class="footer-contact-label">HUBUNGI KAMI</div>
+        <h2 class="footer-heading">Mari Berkolaborasi Bersama Kami.</h2>
+        <button class="footer-btn" onclick="showView('register')">Jadwalkan Pertemuan <span>→</span></button>
+
+        <div style="margin-top: 3rem;">
+          <div class="footer-contact-label" style="font-size: 0.65rem">ATAU EMAIL KAMI DI</div>
+          <div class="footer-email-box">
+            alumni.tp2016@undip.ac.id
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" style="margin-left: 5px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </div>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links-container">
+          <div class="footer-links-col">
+            <h4>TAUTAN CEPAT</h4>
+            <ul>
+              <li><a href="#" onclick="showView('landing')">Beranda</a></li>
+              <li><a href="#" onclick="showView('search-public')">Cari Rekan</a></li>
+              <li><a href="#" onclick="scrollToNews()">Kabar Berita</a></li>
+              <li><a href="#" onclick="showView('register')">Pendaftaran</a></li>
+              <li><a href="#" onclick="showView('login')">Portal Login</a></li>
+            </ul>
+          </div>
+          <div class="footer-links-col">
+            <h4>INFORMASI</h4>
+            <ul>
+              <li><a href="#">Syarat Layanan</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+              <li><a href="#">Bantuan & FAQ</a></li>
+              <li><a href="#">Pengaturan Cookie</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copyright">© IKATAN ALUMNI TEKNIK PERKAPALAN UNDIP 2016. SELURUH HAK CIPTA DILINDUNGI.</div>
+      <div class="footer-socials">
+        <!-- Facebook -->
+        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        <!-- Twitter -->
+        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+        <!-- Instagram -->
+        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        <!-- LinkedIn -->
+        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===========================
+     VIEW: SEARCH PUBLIC
+=========================== -->
+<div class="view" id="view-search-public" style="padding-top:68px;min-height:100vh">
+  <div style="padding:3rem 4rem">
+    <div class="register-header">
+      <div class="eyebrow">Database Alumni</div>
+      <h2>Cari Alumni Teknik Perkapalan 2016</h2>
+    </div>
+    <div class="search-hero-box" style="margin-bottom:2rem">
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <svg viewBox="0 0 24 24" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:rgba(255,255,255,0.4)" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="search-input" type="text" placeholder="Nama, kota, pekerjaan..." id="searchPageInput" oninput="searchAlumniPage()">
+        </div>
+        <select class="form-select" id="searchProv" onchange="searchAlumniPage()" style="width:180px;border-radius:10px;background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.2)">
+          <option value="">Semua Provinsi</option>
+        </select>
+        <button class="btn-search" onclick="searchAlumniPage()">Cari</button>
+      </div>
+    </div>
+    <div id="searchPageResults" class="search-result-grid" style="margin-top:0"></div>
+  </div>
+</div>
+
+<!-- ===========================
+     VIEW: LOGIN
+=========================== -->
+<div class="view" id="view-login">
+  <div class="login-wrap">
+    <div class="login-left">
+      <div class="login-brand">
+        <img src="logo.png" alt="Logo TP" class="logo">
+        <h1>Portal Alumni</h1>
+        <p>Teknik Perkapalan Universitas Diponegoro Angkatan 2016</p>
+      </div>
+      <div class="login-deco"></div>
+    </div>
+    <div class="login-right">
+      <div class="login-form-box">
+        <div class="login-back" onclick="showView('landing')">
+          ← Kembali ke Beranda
+        </div>
+        <h2>Selamat Datang</h2>
+        <p>Masuk ke portal alumni Teknik Perkapalan UNDIP 2016</p>
+        <div class="login-error" id="loginError">Username atau password salah. Silakan coba lagi.</div>
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input class="form-input" type="text" id="loginUser" placeholder="masukkan username..." onkeydown="if(event.key==='Enter') doLogin()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" id="loginPass" placeholder="masukkan password..." onkeydown="if(event.key==='Enter') doLogin()">
+        </div>
+        <button class="btn-full" onclick="doLogin()">Masuk ke Portal</button>
+        <div style="text-align:center;margin-top:1.5rem;font-size:0.8rem;color:var(--gray-600)">
+          Belum terdaftar? <a href="#" onclick="showView('register')" style="color:var(--navy);font-weight:600">Daftar Sekarang</a>
+        </div>
+        <div style="margin-top:1.5rem;padding:1rem;background:var(--gray-100);border-radius:10px;font-size:0.75rem;color:var(--gray-600)">
+          <strong style="color:var(--navy)">Demo Akun:</strong><br>
+          🔴 Master Admin: <code>masteradmin</code> / <code>master123</code><br>
+          🟡 Admin: <code>admin</code> / <code>admin123</code><br>
+          🟢 Alumni: <code>budisantoso</code> / <code>alumni123</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     VIEW: REGISTER
+=========================== -->
+<div class="view" id="view-register">
+  <div class="register-wrap">
+    <div class="register-container">
+      <div class="register-header">
+        <div class="eyebrow">Portal Alumni UNDIP 2016</div>
+        <h2>Formulir Pendaftaran Alumni</h2>
+        <p style="font-size:0.85rem;color:var(--gray-600);margin-top:0.5rem">Teknik Perkapalan · Universitas Diponegoro · Angkatan 2016</p>
+      </div>
+
+      <div class="success-toast" id="registerSuccess">
+        ✅ Pendaftaran berhasil! Data Anda telah tersimpan.
+      </div>
+
+      <!-- Data Diri -->
+      <div class="form-card">
+        <h3><span>1</span>Data Diri</h3>
+        <div class="form-grid">
+          <div class="form-group form-full">
+            <label class="form-label">Foto Profil</label>
+            <div class="foto-upload-box" onclick="document.getElementById('reg_foto').click()">
+              <img id="reg_foto_preview" src="" alt="Preview">
+              <div id="reg_foto_text">📸 Klik untuk upload foto formal/bebas rapi</div>
+              <input type="file" id="reg_foto" accept="image/*" style="display:none" onchange="handleFotoUpload(event)">
+            </div>
+          </div>
+          <div class="form-group form-full">
+            <label class="form-label">Nama Lengkap *</label>
+            <input class="form-input" type="text" id="reg_nama" placeholder="Nama sesuai ijazah">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Asal Daerah *</label>
+            <input class="form-input" type="text" id="reg_asal" placeholder="Kota/Kabupaten asal">
+          </div>
+          <div class="form-group">
+            <label class="form-label">No. WhatsApp</label>
+            <input class="form-input" type="text" id="reg_wa" placeholder="08xx-xxxx-xxxx">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" id="reg_email" placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">NIM</label>
+            <input class="form-input" type="text" id="reg_nim" placeholder="Nomor Induk Mahasiswa">
+          </div>
+        </div>
+      </div>
+
+      <!-- Domisili -->
+      <div class="form-card">
+        <h3><span>2</span>Domisili (KTP)</h3>
+        <div class="form-grid cols-3">
+          <div class="form-group">
+            <label class="form-label">Provinsi *</label>
+            <select class="form-select" id="reg_dom_prov" onchange="updateDomKota()">
+              <option value="">Pilih Provinsi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kota/Kabupaten *</label>
+            <select class="form-select" id="reg_dom_kota">
+              <option value="">Pilih Kota</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kode Pos</label>
+            <input class="form-input" type="text" id="reg_dom_pos" placeholder="Kode pos">
+          </div>
+          <div class="form-group form-full">
+            <label class="form-label">Alamat Lengkap *</label>
+            <textarea class="form-textarea" id="reg_dom_alamat" placeholder="Jalan, RT/RW, Kelurahan, Kecamatan"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tempat Tinggal Saat Ini -->
+      <div class="form-card">
+        <h3><span>3</span>Tempat Tinggal Saat Ini</h3>
+        <label class="checkbox-item" style="margin-bottom:1.2rem;cursor:pointer">
+          <input type="checkbox" id="reg_same_address" checked onchange="toggleSameAddress()">
+          Tempat tinggal saat ini sama dengan domisili (KTP)
+        </label>
+        <div id="tinggal_form" style="display:none;">
+          <div class="form-grid cols-3">
+            <div class="form-group">
+              <label class="form-label">Provinsi *</label>
+              <select class="form-select" id="reg_tinggal_prov" onchange="updateTinggalKota()">
+                <option value="">Pilih Provinsi</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Kota/Kabupaten *</label>
+              <select class="form-select" id="reg_tinggal_kota">
+                <option value="">Pilih Kota</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Kode Pos</label>
+              <input class="form-input" type="text" id="reg_tinggal_pos" placeholder="Kode pos">
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">Alamat Lengkap *</label>
+              <textarea class="form-textarea" id="reg_tinggal_alamat" placeholder="Jalan, RT/RW, Kelurahan, Kecamatan"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pekerjaan -->
+      <div class="form-card">
+        <h3><span>4</span>Informasi Pekerjaan</h3>
+        <div class="form-group">
+          <label class="form-label">Status Pekerjaan *</label>
+          <div class="radio-group" id="pekerjaan_group">
+            <label class="radio-item" onclick="selectPekerjaan(this,'Karyawan Swasta')">
+              <input type="radio" name="pekerjaan" value="Karyawan Swasta">
+              <span class="radio-label">💼 Karyawan Swasta</span>
+            </label>
+            <label class="radio-item" onclick="selectPekerjaan(this,'BUMN/BUMD')">
+              <input type="radio" name="pekerjaan" value="BUMN/BUMD">
+              <span class="radio-label">🏛️ BUMN / BUMD</span>
+            </label>
+            <label class="radio-item" onclick="selectPekerjaan(this,'ASN/TNI/POLRI')">
+              <input type="radio" name="pekerjaan" value="ASN/TNI/POLRI">
+              <span class="radio-label">🎖️ ASN / TNI / POLRI</span>
+            </label>
+            <label class="radio-item" onclick="selectPekerjaan(this,'Wiraswasta')">
+              <input type="radio" name="pekerjaan" value="Wiraswasta">
+              <span class="radio-label">🚀 Wiraswasta / Entrepreneur</span>
+            </label>
+            <label class="radio-item" onclick="selectPekerjaan(this,'Mahasiswa')">
+              <input type="radio" name="pekerjaan" value="Mahasiswa">
+              <span class="radio-label">🎓 Mahasiswa / Melanjutkan Studi</span>
+            </label>
+            <label class="radio-item" onclick="selectPekerjaan(this,'Lainnya')">
+              <input type="radio" name="pekerjaan" value="Lainnya">
+              <span class="radio-label">📝 Lainnya</span>
+            </label>
+          </div>
+          <div id="pekerjaan_lainnya_wrap" style="display:none;margin-top:0.75rem">
+            <label class="form-label">Jenis Pekerjaan Lainnya *</label>
+            <input class="form-input" type="text" id="reg_pekerjaan_lainnya" placeholder="Tuliskan jenis pekerjaan Anda...">
+          </div>
+        </div>
+        <div class="form-grid" style="margin-top:1rem">
+          <div class="form-group">
+            <label class="form-label">Nama Perusahaan / Instansi</label>
+            <input class="form-input" type="text" id="reg_perusahaan" placeholder="Nama perusahaan atau instansi">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bidang Pekerjaan</label>
+            <select class="form-select" id="reg_bidang">
+              <option value="">Pilih bidang pekerjaan</option>
+              <option>Perkapalan / Naval Architecture</option>
+              <option>Teknik Kelautan / Ocean Engineering</option>
+              <option>Minyak & Gas (Oil & Gas)</option>
+              <option>Galangan Kapal / Shipyard</option>
+              <option>Transportasi & Logistik</option>
+              <option>Konstruksi & Infrastruktur</option>
+              <option>Perbankan & Keuangan</option>
+              <option>Teknologi & IT</option>
+              <option>Konsultan & Engineering</option>
+              <option>Pendidikan & Penelitian</option>
+              <option>Pemerintahan & Birokrasi</option>
+              <option>Wirausaha Mandiri</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Jabatan / Posisi</label>
+            <input class="form-input" type="text" id="reg_jabatan" placeholder="Jabatan saat ini">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kota Bekerja</label>
+            <input class="form-input" type="text" id="reg_kota_kerja" placeholder="Kota tempat bekerja">
+          </div>
+        </div>
+      </div>
+
+      <!-- Akun -->
+      <div class="form-card">
+        <h3><span>5</span>Buat Akun Portal</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Username *</label>
+            <input class="form-input" type="text" id="reg_username" placeholder="Buat username tanpa spasi">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password *</label>
+            <input class="form-input" type="password" id="reg_pass" placeholder="Minimal 6 karakter">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Konfirmasi Password *</label>
+            <input class="form-input" type="password" id="reg_pass2" placeholder="Ulangi password">
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:1rem;align-items:center">
+        <button class="form-submit" onclick="submitRegistration()">Daftar Sekarang →</button>
+        <button class="btn-outline" onclick="showView('landing')">Kembali</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     VIEW: CPANEL
+=========================== -->
+<div class="view" id="view-cpanel">
+  <!-- Sidebar -->
+  <div class="cpanel-sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-inner">
+        <img src="logo.png" alt="Logo TP">
+        <div class="logo-info">
+          <small>UNDIP 2016</small>
+          <strong>Teknik Perkapalan</strong>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-avatar" id="sidebarAvatar">MA</div>
+        <div>
+          <div class="sidebar-user-name" id="sidebarName">Master Admin</div>
+          <div class="sidebar-user-role" id="sidebarRole">Master Admin</div>
+        </div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Utama</div>
+      <div class="sidebar-link active" onclick="showPanel('dashboard')" id="nav-dashboard">
+        <svg viewBox="0 0 24 24" class="icon"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </div>
+      <div class="sidebar-link" onclick="showPanel('alumni')" id="nav-alumni">
+        <svg viewBox="0 0 24 24" class="icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Data Alumni
+        <span class="badge-count" id="alumniCount">0</span>
+      </div>
+      <div class="sidebar-link admin-only" onclick="showPanel('articles')" id="nav-articles">
+        <svg viewBox="0 0 24 24" class="icon"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2-2Z"/><path d="M2 20h2"/><path d="M8 6h8"/><path d="M8 10h8"/><path d="M8 14h4"/></svg>
+        Artikel & Berita
+      </div>
+      <div class="sidebar-section-label master-only">Manajemen</div>
+      <div class="sidebar-link master-only" onclick="showPanel('users')" id="nav-users">
+        <svg viewBox="0 0 24 24" class="icon"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        Manajemen User
+      </div>
+      <div class="sidebar-link master-only" onclick="showPanel('settings')" id="nav-settings">
+        <svg viewBox="0 0 24 24" class="icon"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Pengaturan
+      </div>
+      <div class="sidebar-section-label alumni-only hidden">Alumni</div>
+      <div class="sidebar-link alumni-only hidden" onclick="showPanel('my-profile')" id="nav-my-profile">
+        <svg viewBox="0 0 24 24" class="icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Profil Saya
+      </div>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="btn-logout" onclick="doLogout()">
+        <svg viewBox="0 0 24 24" class="icon"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Keluar
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="cpanel-main">
+    <div class="cpanel-topbar">
+      <div class="topbar-title" id="panelTitle">Dashboard</div>
+      <div class="topbar-right">
+        <div class="topbar-search">
+          <svg viewBox="0 0 24 24" class="icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" placeholder="Cari..." id="topbarSearch" oninput="topbarSearchFn()">
+        </div>
+        <div class="topbar-notif">
+          <svg viewBox="0 0 24 24" class="icon" style="width:16px;height:16px"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="topbar-notif-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cpanel-content">
+      <!-- PANEL: Dashboard -->
+      <div class="cpanel-panel active" id="panel-dashboard">
+        <div class="stats-grid" id="dashboardStats"></div>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem">
+          <div class="table-card">
+            <div class="table-card-header">
+              <div class="table-card-title">Alumni Terbaru</div>
+              <button class="btn-sm btn-sm-primary" onclick="showPanel('alumni')">Lihat Semua</button>
+            </div>
+            <table id="recentAlumniTable">
+              <thead><tr><th>Nama</th><th>Kota</th><th>Pekerjaan</th><th>Terdaftar</th></tr></thead>
+              <tbody id="recentAlumniBody"></tbody>
+            </table>
+          </div>
+          <div class="table-card">
+            <div class="table-card-header">
+              <div class="table-card-title">Status Pekerjaan</div>
+            </div>
+            <div id="jobChart" style="padding:0.5rem 0"></div>
+          </div>
+        </div>
+
+        <!-- 3 Charts Row -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:1.5rem">
+          <!-- Chart: By Perusahaan -->
+          <div class="table-card">
+            <div class="table-card-header">
+              <div class="table-card-title">🏢 Top Perusahaan</div>
+            </div>
+            <div id="chartPerusahaan" style="padding:0.25rem 0"></div>
+          </div>
+          <!-- Chart: By Lokasi Kerja -->
+          <div class="table-card">
+            <div class="table-card-header">
+              <div class="table-card-title">📍 Lokasi Kerja</div>
+            </div>
+            <div id="chartLokasiKerja" style="padding:0.25rem 0"></div>
+          </div>
+          <!-- Chart: By Bidang Kerja -->
+          <div class="table-card">
+            <div class="table-card-header">
+              <div class="table-card-title">⚙️ Bidang Kerja</div>
+            </div>
+            <div id="chartBidang" style="padding:0.25rem 0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL: Data Alumni -->
+      <div class="cpanel-panel" id="panel-alumni">
+        <div class="table-card">
+          <div class="table-card-header">
+            <div class="table-card-title">Data Alumni Terdaftar</div>
+            <div class="table-card-actions">
+              <button class="btn-sm btn-sm-gold" onclick="showView('register')" style="display:none" id="btnAddAlumni">+ Tambah Alumni</button>
+              <button class="btn-sm btn-sm-outline" onclick="exportCSV()">⬇ Export CSV</button>
+            </div>
+          </div>
+          <div class="filter-bar">
+            <input class="filter-input" type="text" placeholder="Cari nama, kota, NIM..." id="alumniFilter" oninput="renderAlumniTable()">
+            <select class="filter-select" id="filterProv" onchange="renderAlumniTable()">
+              <option value="">Semua Provinsi</option>
+            </select>
+            <select class="filter-select" id="filterPekerjaan" onchange="renderAlumniTable()">
+              <option value="">Semua Pekerjaan</option>
+              <option>Karyawan Swasta</option>
+              <option>BUMN/BUMD</option>
+              <option>ASN/TNI/POLRI</option>
+              <option>Wiraswasta</option>
+              <option>Mahasiswa</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+          <table>
+            <thead><tr><th>#</th><th>Nama Alumni</th><th>Domisili</th><th>Pekerjaan</th><th>Perusahaan</th><th>Bidang</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="alumniTableBody"></tbody>
+          </table>
+          <div class="table-pagination">
+            <div class="table-pagination-info" id="alumniPagInfo"></div>
+            <div class="table-pagination-btns" id="alumniPagBtns"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL: Artikel -->
+      <div class="cpanel-panel" id="panel-articles">
+        <div class="table-card">
+          <div class="table-card-header">
+            <div class="table-card-title">Manajemen Artikel & Berita</div>
+            <button class="btn-sm btn-sm-gold" onclick="openArticleModal()">+ Tulis Artikel</button>
+          </div>
+          <table>
+            <thead><tr><th>Judul</th><th>Kategori</th><th>Penulis</th><th>Tanggal</th><th>Aksi</th></tr></thead>
+            <tbody id="articlesTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PANEL: User Management -->
+      <div class="cpanel-panel" id="panel-users">
+        <div class="table-card">
+          <div class="table-card-header">
+            <div class="table-card-title">Manajemen User & Akses</div>
+            <button class="btn-sm btn-sm-gold" onclick="openUserModal()">+ Tambah User</button>
+          </div>
+          <div class="tab-group">
+            <button class="tab-btn active" onclick="filterUserTab('all',this)">Semua</button>
+            <button class="tab-btn" onclick="filterUserTab('master_admin',this)">Master Admin</button>
+            <button class="tab-btn" onclick="filterUserTab('admin',this)">Admin</button>
+            <button class="tab-btn" onclick="filterUserTab('alumni',this)">Alumni</button>
+          </div>
+          <table>
+            <thead><tr><th>User</th><th>Username</th><th>Email</th><th>Role</th><th>Status</th><th>Bergabung</th><th>Aksi</th></tr></thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PANEL: Settings -->
+      <div class="cpanel-panel" id="panel-settings">
+        <div class="form-card" style="max-width:600px">
+          <h3><span>⚙</span>Pengaturan Portal</h3>
+          <div class="form-group">
+            <label class="form-label">Nama Portal</label>
+            <input class="form-input" value="Alumni Teknik Perkapalan UNDIP 2016" id="set_nama">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Angkatan</label>
+            <input class="form-input" value="2016" id="set_angkatan">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Deskripsi Singkat</label>
+            <textarea class="form-textarea" id="set_desc">Portal resmi ikatan alumni Teknik Perkapalan Universitas Diponegoro Angkatan 2016.</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Kontak</label>
+            <input class="form-input" value="alumni.tp2016@undip.ac.id" id="set_email">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pendaftaran Baru</label>
+            <select class="form-select" id="set_reg">
+              <option value="open">Terbuka — Siapapun dapat mendaftar</option>
+              <option value="approval">Perlu Persetujuan Admin</option>
+              <option value="closed">Ditutup</option>
+            </select>
+          </div>
+
+          <!-- Tambahan Konfigurasi Supabase -->
+          <div class="form-group" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);">
+            <label class="form-label" style="color:var(--navy); font-weight:700">Supabase API Configuration</label>
+            <p style="font-size:0.75rem; color:var(--gray-600); margin-bottom:1rem">Masukkan kredensial Supabase untuk menghubungkan portal dengan database *Backend*.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Supabase Project URL</label>
+            <input class="form-input" placeholder="https://xxxx.supabase.co" id="set_supa_url">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Supabase Anon / API Key</label>
+            <input class="form-input" type="password" placeholder="eyJh..." id="set_supa_key">
+          </div>
+
+          <button class="btn-sm btn-sm-primary" style="margin-top:1rem" onclick="alert('Pengaturan disimpan!')">Simpan Pengaturan</button>
+        </div>
+      </div>
+
+      <!-- PANEL: My Profile (Alumni) -->
+      <div class="cpanel-panel" id="panel-my-profile">
+        <div class="alumni-profile-card" id="myProfileContent"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     MODALS
+=========================== -->
+<!-- Article Modal -->
+<div class="modal-overlay" id="articleModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="articleModalTitle">Tulis Artikel Baru</div>
+      <button class="modal-close" onclick="closeModal('articleModal')">✕</button>
+    </div>
+    <div class="form-group">
+      <div class="article-editor-img" id="articleImgPrev" onclick="document.getElementById('articleImgInput').click()">
+        <div class="img-placeholder">
+          <div style="font-size:2rem">📷</div>
+          <div>Klik untuk unggah gambar sampul</div>
+          <div style="font-size:0.72rem;color:var(--gray-400)">Rekomendasi: 1200×630px</div>
+        </div>
+        <input type="file" id="articleImgInput" accept="image/*" style="display:none" onchange="previewArticleImg(event)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Judul Artikel *</label>
+      <input class="form-input" type="text" id="art_judul" placeholder="Tulis judul artikel...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Kategori</label>
+      <select class="form-select" id="art_kategori">
+        <option>Karir & Pekerjaan</option>
+        <option>Kegiatan Alumni</option>
+        <option>Informasi Industri</option>
+        <option>Prestasi Alumni</option>
+        <option>Akademik & Riset</option>
+        <option>Pengumuman</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Isi Artikel *</label>
+      <textarea class="form-textarea" id="art_konten" style="min-height:140px" placeholder="Tulis isi artikel di sini..."></textarea>
+    </div>
+    <div style="display:flex;gap:0.75rem;margin-top:1rem">
+      <button class="btn-sm btn-sm-primary" style="padding:10px 24px;font-size:0.85rem" onclick="saveArticle()">Publikasikan</button>
+      <button class="btn-sm btn-sm-outline" style="padding:10px 24px;font-size:0.85rem" onclick="closeModal('articleModal')">Batal</button>
+    </div>
+  </div>
+</div>
+
+<!-- User Modal -->
+<div class="modal-overlay" id="userModal">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-header">
+      <div class="modal-title">Tambah User Baru</div>
+      <button class="modal-close" onclick="closeModal('userModal')">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nama Lengkap *</label>
+      <input class="form-input" type="text" id="usr_nama" placeholder="Nama user">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email *</label>
+      <input class="form-input" type="email" id="usr_email" placeholder="email@example.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Role *</label>
+      <select class="form-select" id="usr_role">
+        <option value="admin">Admin</option>
+        <option value="master_admin">Master Admin</option>
+        <option value="alumni">Alumni</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password *</label>
+      <input class="form-input" type="password" id="usr_pass" placeholder="Minimal 6 karakter">
+    </div>
+    <div style="display:flex;gap:0.75rem;margin-top:1rem">
+      <button class="btn-sm btn-sm-primary" style="padding:10px 24px;font-size:0.85rem" onclick="saveUser()">Simpan User</button>
+      <button class="btn-sm btn-sm-outline" style="padding:10px 24px;font-size:0.85rem" onclick="closeModal('userModal')">Batal</button>
+    </div>
+  </div>
+</div>
+
+<!-- Alumni Detail Modal -->
+<div class="modal-overlay" id="alumniDetailModal">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header">
+      <div class="modal-title">Detail Alumni</div>
+      <button class="modal-close" onclick="closeModal('alumniDetailModal')">✕</button>
+    </div>
+    <div id="alumniDetailContent"></div>
+  </div>
+</div>
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script>
+// ===========================
+// DATA LAYER (localStorage SQL simulation)
+// ===========================
+const DB = {
+  get(table) {
+    try { return JSON.parse(localStorage.getItem('tp_'+table) || '[]'); } catch(e) { return []; }
+  },
+  set(table, data) {
+    localStorage.setItem('tp_'+table, JSON.stringify(data));
+  },
+  insert(table, row) {
+    const data = DB.get(table);
+    row.id = Date.now();
+    row.created_at = new Date().toISOString();
+    data.push(row);
+    DB.set(table, data);
+    return row;
+  },
+  update(table, id, updates) {
+    const data = DB.get(table).map(r => r.id === id ? {...r, ...updates} : r);
+    DB.set(table, data);
+  },
+  delete(table, id) {
+    DB.set(table, DB.get(table).filter(r => r.id !== id));
+  },
+  find(table, predicate) {
+    return DB.get(table).find(predicate);
+  }
+};
+
+// Seed default data
+function seedData() {
+  if (DB.get('seeded').length > 0) return;
+
+  // Users
+  const users = [
+    { id:1001, nama:'Master Admin', username:'masteradmin', email:'masteradmin@undip.ac.id', password:'master123', role:'master_admin', status:'active', created_at:'2024-01-01' },
+    { id:1002, nama:'Admin Sekretariat', username:'admin', email:'admin@undip.ac.id', password:'admin123', role:'admin', status:'active', created_at:'2024-01-01' },
+    { id:1003, nama:'Budi Santoso', username:'budisantoso', email:'alumni@undip.ac.id', password:'alumni123', role:'alumni', status:'active', created_at:'2024-01-15', alumni_id: 2001 },
+  ];
+  DB.set('users', users);
+
+  // Alumni
+  const alumni = [
+    { id:2001, nama:'Budi Santoso', nim:'21090116140001', asal:'Semarang', email:'alumni@undip.ac.id', wa:'081234567890', dom_prov:'Jawa Tengah', dom_kota:'Semarang', dom_alamat:'Jl. Pemuda No. 5, RT 02/RW 03, Semarang Tengah', same_address:true, tinggal_prov:'Jawa Tengah', tinggal_kota:'Semarang', tinggal_alamat:'Jl. Pemuda No. 5, RT 02/RW 03, Semarang Tengah', pekerjaan:'Karyawan Swasta', perusahaan:'PT Dok Kodja Bahari', bidang:'Galangan Kapal / Shipyard', jabatan:'Naval Architect', kota_kerja:'Jakarta', status:'active', created_at:'2024-01-15' },
+    { id:2002, nama:'Rina Puspita', nim:'21090116140022', asal:'Surabaya', email:'rina@gmail.com', wa:'082345678901', dom_prov:'Jawa Timur', dom_kota:'Surabaya', dom_alamat:'Jl. Darmo No. 12, Surabaya', same_address:false, tinggal_prov:'DKI Jakarta', tinggal_kota:'Jakarta Selatan', tinggal_alamat:'Jl. Sudirman No. 88, Jakarta', pekerjaan:'BUMN/BUMD', perusahaan:'PT Pelabuhan Indonesia III', bidang:'Transportasi & Logistik', jabatan:'Marine Engineer', kota_kerja:'Jakarta', status:'active', created_at:'2024-01-20' },
+    { id:2003, nama:'Ahmad Fauzi', nim:'21090116140033', asal:'Bandung', email:'fauzi@gmail.com', wa:'083456789012', dom_prov:'Jawa Barat', dom_kota:'Bandung', dom_alamat:'Jl. Dago No. 45, Bandung', same_address:true, tinggal_prov:'Jawa Barat', tinggal_kota:'Bandung', tinggal_alamat:'Jl. Dago No. 45, Bandung', pekerjaan:'Karyawan Swasta', perusahaan:'PT Pertamina', bidang:'Minyak & Gas (Oil & Gas)', jabatan:'Process Engineer', kota_kerja:'Balikpapan', status:'active', created_at:'2024-02-01' },
+    { id:2004, nama:'Siti Rahmawati', nim:'21090116140044', asal:'Makassar', email:'siti@gmail.com', wa:'084567890123', dom_prov:'Sulawesi Selatan', dom_kota:'Makassar', dom_alamat:'Jl. Penghibur No. 7, Makassar', same_address:true, tinggal_prov:'Sulawesi Selatan', tinggal_kota:'Makassar', tinggal_alamat:'Jl. Penghibur No. 7, Makassar', pekerjaan:'ASN/TNI/POLRI', perusahaan:'Kementerian Perhubungan', bidang:'Pemerintahan & Birokrasi', jabatan:'Analis Transportasi', kota_kerja:'Jakarta', status:'active', created_at:'2024-02-10' },
+    { id:2005, nama:'Dimas Pratama', nim:'21090116140055', asal:'Yogyakarta', email:'dimas@gmail.com', wa:'085678901234', dom_prov:'DIY', dom_kota:'Yogyakarta', dom_alamat:'Jl. Malioboro No. 100, Yogyakarta', same_address:false, tinggal_prov:'Kalimantan Timur', tinggal_kota:'Balikpapan', tinggal_alamat:'Jl. Mulawarman No. 15, Balikpapan', pekerjaan:'Wiraswasta', perusahaan:'CV Bahari Nusantara', bidang:'Perkapalan / Naval Architecture', jabatan:'Direktur', kota_kerja:'Balikpapan', status:'active', created_at:'2024-03-01' },
+    { id:2006, nama:'Fajar Nugroho', nim:'21090116140066', asal:'Solo', email:'fajar@gmail.com', wa:'086789012345', dom_prov:'Jawa Tengah', dom_kota:'Surakarta', dom_alamat:'Jl. Slamet Riyadi No. 20, Solo', same_address:false, tinggal_prov:'Kepulauan Riau', tinggal_kota:'Batam', tinggal_alamat:'Jl. Batam Centre No. 3, Batam', pekerjaan:'Karyawan Swasta', perusahaan:'Sembcorp Marine', bidang:'Galangan Kapal / Shipyard', jabatan:'Production Engineer', kota_kerja:'Batam', status:'active', created_at:'2024-03-15' },
+    { id:2007, nama:'Maya Sari', nim:'21090116140077', asal:'Medan', email:'maya@gmail.com', wa:'087890123456', dom_prov:'Sumatera Utara', dom_kota:'Medan', dom_alamat:'Jl. Gatot Subroto No. 8, Medan', same_address:true, tinggal_prov:'Sumatera Utara', tinggal_kota:'Medan', tinggal_alamat:'Jl. Gatot Subroto No. 8, Medan', pekerjaan:'Mahasiswa', perusahaan:'ITS Surabaya', bidang:'Akademik & Riset', jabatan:'Mahasiswa S2', kota_kerja:'Surabaya', status:'active', created_at:'2024-04-01' },
+    { id:2008, nama:'Rizky Aditya', nim:'21090116140088', asal:'Pontianak', email:'rizky@gmail.com', wa:'088901234567', dom_prov:'Kalimantan Barat', dom_kota:'Pontianak', dom_alamat:'Jl. A. Yani No. 33, Pontianak', same_address:true, tinggal_prov:'Kalimantan Barat', tinggal_kota:'Pontianak', tinggal_alamat:'Jl. A. Yani No. 33, Pontianak', pekerjaan:'BUMN/BUMD', perusahaan:'PT ASDP Indonesia Ferry', bidang:'Transportasi & Logistik', jabatan:'Port Manager', kota_kerja:'Pontianak', status:'active', created_at:'2024-04-20' },
+  ];
+  DB.set('alumni', alumni);
+
+  // Articles
+  const articles = [
+    { id:3001, judul:'Alumni TP UNDIP 2016 Raih Penghargaan Insinyur Terbaik Nasional', kategori:'Prestasi Alumni', konten:'Budi Santoso, alumni Teknik Perkapalan UNDIP angkatan 2016, berhasil meraih penghargaan Insinyur Perkapalan Terbaik dari IPERINDO pada tahun 2024. Penghargaan ini merupakan bentuk apresiasi atas kontribusinya dalam pengembangan galangan kapal nasional.', penulis:'Admin Sekretariat', image:'', created_at:'2024-06-10' },
+    { id:3002, judul:'Peluang Karir di Industri Perkapalan 2024: Apa yang Perlu Diketahui?', kategori:'Karir & Pekerjaan', konten:'Industri perkapalan Indonesia mengalami pertumbuhan signifikan di tahun 2024. Berikut adalah ringkasan peluang karir yang tersedia bagi para insinyur perkapalan, mulai dari galangan kapal, minyak dan gas, hingga transportasi laut.', penulis:'Admin Sekretariat', image:'', created_at:'2024-07-05' },
+    { id:3003, judul:'Reuni Akbar Alumni Teknik Perkapalan UNDIP 2016 di Semarang', kategori:'Kegiatan Alumni', konten:'Reuni akbar alumni Teknik Perkapalan UNDIP angkatan 2016 sukses digelar di Hotel Ciputra Semarang pada bulan Agustus 2024. Sebanyak 60 alumni hadir dari berbagai penjuru Indonesia untuk mempererat tali silaturahmi.', penulis:'Master Admin', image:'', created_at:'2024-08-15' },
+  ];
+  DB.set('articles', articles);
+
+  DB.set('seeded', [{done:true}]);
+}
+
+// ===========================
+// PROVINCES & CITIES DATA
+// ===========================
+const PROVINCES = {
+  'Aceh': ['Banda Aceh', 'Lhokseumawe', 'Langsa', 'Sabang', 'Subulussalam'],
+  'Sumatera Utara': ['Medan', 'Binjai', 'Tebing Tinggi', 'Pematangsiantar', 'Tanjungbalai'],
+  'Sumatera Barat': ['Padang', 'Bukittinggi', 'Payakumbuh', 'Pariaman', 'Solok'],
+  'Riau': ['Pekanbaru', 'Dumai', 'Bengkalis', 'Siak'],
+  'Kepulauan Riau': ['Batam', 'Tanjungpinang', 'Bintan'],
+  'Jambi': ['Jambi', 'Sungai Penuh'],
+  'Sumatera Selatan': ['Palembang', 'Lubuklinggau', 'Prabumulih', 'Pagaralam'],
+  'Bangka Belitung': ['Pangkalpinang', 'Bangka', 'Belitung'],
+  'Bengkulu': ['Bengkulu', 'Curup'],
+  'Lampung': ['Bandar Lampung', 'Metro', 'Pringsewu'],
+  'DKI Jakarta': ['Jakarta Pusat', 'Jakarta Barat', 'Jakarta Selatan', 'Jakarta Timur', 'Jakarta Utara'],
+  'Jawa Barat': ['Bandung', 'Bekasi', 'Bogor', 'Cimahi', 'Cirebon', 'Depok', 'Sukabumi', 'Tasikmalaya'],
+  'Banten': ['Serang', 'Cilegon', 'Tangerang', 'Tangerang Selatan', 'Pandeglang', 'Lebak'],
+  'Jawa Tengah': ['Semarang', 'Surakarta', 'Magelang', 'Salatiga', 'Tegal', 'Pekalongan', 'Kudus', 'Purwokerto', 'Cilacap'],
+  'DIY': ['Yogyakarta', 'Sleman', 'Bantul', 'Gunung Kidul', 'Kulon Progo'],
+  'Jawa Timur': ['Surabaya', 'Malang', 'Madiun', 'Kediri', 'Blitar', 'Mojokerto', 'Pasuruan', 'Probolinggo', 'Batu'],
+  'Bali': ['Denpasar', 'Badung', 'Gianyar', 'Karangasem', 'Klungkung', 'Buleleng'],
+  'NTB': ['Mataram', 'Bima', 'Sumbawa'],
+  'NTT': ['Kupang', 'Ende', 'Maumere'],
+  'Kalimantan Barat': ['Pontianak', 'Singkawang', 'Ketapang'],
+  'Kalimantan Tengah': ['Palangkaraya', 'Sampit', 'Kotawaringin Barat'],
+  'Kalimantan Selatan': ['Banjarmasin', 'Banjarbaru', 'Kotabaru'],
+  'Kalimantan Timur': ['Samarinda', 'Balikpapan', 'Bontang', 'Kutai Kartanegara'],
+  'Kalimantan Utara': ['Tarakan', 'Nunukan', 'Bulungan'],
+  'Sulawesi Utara': ['Manado', 'Bitung', 'Kotamobagu', 'Tomohon'],
+  'Sulawesi Tengah': ['Palu', 'Luwuk', 'Tolitoli'],
+  'Sulawesi Selatan': ['Makassar', 'Parepare', 'Palopo', 'Maros'],
+  'Sulawesi Tenggara': ['Kendari', 'Bau-Bau'],
+  'Gorontalo': ['Gorontalo', 'Limboto'],
+  'Sulawesi Barat': ['Mamuju', 'Majene'],
+  'Maluku': ['Ambon', 'Tual'],
+  'Maluku Utara': ['Ternate', 'Tidore'],
+  'Papua': ['Jayapura', 'Merauke', 'Sorong'],
+  'Papua Barat': ['Manokwari', 'Sorong'],
+};
+
+function populateProvinceSelects() {
+  const provSelects = ['reg_dom_prov','reg_tinggal_prov','searchProv','filterProv'];
+  provSelects.forEach(id => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    const cur = sel.value;
+    sel.innerHTML = `<option value="">Pilih Provinsi</option>`;
+    if (id === 'searchProv' || id === 'filterProv') sel.innerHTML = `<option value="">Semua Provinsi</option>`;
+    Object.keys(PROVINCES).sort().forEach(p => {
+      sel.innerHTML += `<option value="${p}" ${p===cur?'selected':''}>${p}</option>`;
+    });
+  });
+}
+
+function updateDomKota() {
+  const prov = document.getElementById('reg_dom_prov').value;
+  const sel = document.getElementById('reg_dom_kota');
+  sel.innerHTML = '<option value="">Pilih Kota</option>';
+  (PROVINCES[prov]||[]).forEach(k => sel.innerHTML += `<option>${k}</option>`);
+}
+function updateTinggalKota() {
+  const prov = document.getElementById('reg_tinggal_prov').value;
+  const sel = document.getElementById('reg_tinggal_kota');
+  sel.innerHTML = '<option value="">Pilih Kota</option>';
+  (PROVINCES[prov]||[]).forEach(k => sel.innerHTML += `<option>${k}</option>`);
+}
+
+// ===========================
+// VIEW SYSTEM
+// ===========================
+let currentView = 'landing';
+function showView(v) {
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-'+v).classList.add('active');
+  currentView = v;
+  window.scrollTo(0,0);
+  if (v === 'landing') {
+    renderNewsGrid();
+    updateStats();
+  }
+  if (v === 'register') populateProvinceSelects();
+  if (v === 'search-public') {
+    populateProvinceSelects();
+    searchAlumniPage();
+  }
+  if (v === 'cpanel') {
+    renderDashboard();
+    renderAlumniTable();
+    renderArticlesTable();
+    renderUsersTable();
+    populateProvinceSelects();
+    applyRoleUI();
+  }
+}
+
+function scrollToNews() {
+  showView('landing');
+  setTimeout(() => document.getElementById('section-news').scrollIntoView({behavior:'smooth'}), 100);
+}
+
+// ===========================
+// AUTH
+// ===========================
+let currentUser = null;
+
+function doLogin() {
+  const username = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const user = DB.find('users', u => u.username === username && u.password === pass && u.status !== 'deleted');
+  if (!user) {
+    document.getElementById('loginError').classList.add('show');
+    return;
+  }
+  document.getElementById('loginError').classList.remove('show');
+  currentUser = user;
+  setupCpanel();
+  showView('cpanel');
+}
+
+function doLogout() {
+  currentUser = null;
+  showView('landing');
+  document.getElementById('navActions').innerHTML = `
+    <button class="btn-nav-login" onclick="showView('login')">Masuk</button>
+    <button class="btn-nav-register" onclick="showView('register')">Daftar Sekarang</button>
+  `;
+}
+
+function setupCpanel() {
+  if (!currentUser) return;
+  const av = currentUser.nama.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+  document.getElementById('sidebarAvatar').textContent = av;
+  document.getElementById('sidebarName').textContent = currentUser.nama;
+  const roleMap = {master_admin:'Master Admin', admin:'Admin', alumni:'Alumni'};
+  document.getElementById('sidebarRole').textContent = roleMap[currentUser.role] || currentUser.role;
+  document.getElementById('navActions').innerHTML = `
+    <span style="color:rgba(255,255,255,0.7);font-size:0.82rem">Halo, <strong>${currentUser.nama.split(' ')[0]}</strong></span>
+    <button class="btn-nav-login" onclick="showView('cpanel')">CPanel</button>
+    <button class="btn-nav-login" onclick="doLogout()">Keluar</button>
+  `;
+}
+
+function applyRoleUI() {
+  if (!currentUser) return;
+  const isMaster = currentUser.role === 'master_admin';
+  const isAlumni = currentUser.role === 'alumni';
+  document.querySelectorAll('.master-only').forEach(el => {
+    el.style.display = isMaster ? '' : 'none';
+  });
+  document.querySelectorAll('.alumni-only').forEach(el => {
+    el.classList.toggle('hidden', !isAlumni);
+  });
+  if (!isMaster && !document.getElementById('nav-users')) return;
+  if (isAlumni) {
+    showPanel('my-profile');
+    renderMyProfile();
+  }
+  // Show add alumni btn for admin/master
+  if (!isAlumni) document.getElementById('btnAddAlumni').style.display = '';
+}
+
+// ===========================
+// CPANEL PANELS
+// ===========================
+function showPanel(p) {
+  document.querySelectorAll('.cpanel-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('active'));
+  const panel = document.getElementById('panel-'+p);
+  if (panel) panel.classList.add('active');
+  const link = document.getElementById('nav-'+p);
+  if (link) link.classList.add('active');
+  const titles = {dashboard:'Dashboard',alumni:'Data Alumni',articles:'Artikel & Berita',users:'Manajemen User',settings:'Pengaturan','my-profile':'Profil Saya'};
+  document.getElementById('panelTitle').textContent = titles[p] || p;
+}
+
+// ===========================
+// DASHBOARD
+// ===========================
+function renderDashboard() {
+  const alumni = DB.get('alumni');
+  const articles = DB.get('articles');
+  const users = DB.get('users');
+  const provinces = [...new Set(alumni.map(a => a.dom_prov))].length;
+
+  document.getElementById('dashboardStats').innerHTML = `
+    <div class="stat-card"><div class="stat-card-icon">👤</div><div class="stat-card-num">${alumni.length}</div><div class="stat-card-label">Total Alumni Terdaftar</div><div class="stat-card-sub">Angkatan 2016</div></div>
+    <div class="stat-card"><div class="stat-card-icon">🗺️</div><div class="stat-card-num">${provinces}</div><div class="stat-card-label">Provinsi Tersebar</div><div class="stat-card-sub">Seluruh Indonesia</div></div>
+    <div class="stat-card"><div class="stat-card-icon">📰</div><div class="stat-card-num">${articles.length}</div><div class="stat-card-label">Artikel Diterbitkan</div><div class="stat-card-sub">Berita & informasi</div></div>
+    <div class="stat-card"><div class="stat-card-icon">🔐</div><div class="stat-card-num">${users.length}</div><div class="stat-card-label">Total User Aktif</div><div class="stat-card-sub">Admin & alumni</div></div>
+  `;
+
+  // Recent alumni
+  const recent = [...alumni].sort((a,b) => b.id - a.id).slice(0,5);
+  document.getElementById('recentAlumniBody').innerHTML = recent.map(a => `
+    <tr>
+      <td><div class="td-user"><div class="td-avatar">${a.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div><div><div class="td-name">${a.nama}</div><div class="td-sub">${a.nim||'-'}</div></div></div></td>
+      <td>${a.dom_kota}</td>
+      <td><span class="badge badge-alumni">${a.pekerjaan}</span></td>
+      <td>${formatDate(a.created_at)}</td>
+    </tr>
+  `).join('');
+
+  // Job chart
+  const jobs = {};
+  alumni.forEach(a => { jobs[a.pekerjaan] = (jobs[a.pekerjaan]||0)+1; });
+  const maxV = Math.max(...Object.values(jobs), 1);
+  document.getElementById('jobChart').innerHTML = Object.entries(jobs).map(([k,v]) => `
+    <div style="margin-bottom:0.6rem">
+      <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:3px">
+        <span>${k}</span><strong>${v}</strong>
+      </div>
+      <div style="height:6px;background:var(--gray-200);border-radius:3px">
+        <div style="height:100%;width:${(v/maxV*100).toFixed(0)}%;background:linear-gradient(90deg,var(--navy),var(--navy-mid));border-radius:3px;transition:width 0.5s"></div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('alumniCount').textContent = alumni.length;
+
+  // Helper: build horizontal bar chart HTML
+  function buildBarChart(containerId, data, colorFrom, colorTo, limit=7) {
+    const sorted = Object.entries(data).sort((a,b)=>b[1]-a[1]).slice(0,limit);
+    const maxV = sorted[0]?.[1] || 1;
+    document.getElementById(containerId).innerHTML = sorted.length
+      ? sorted.map(([k,v]) => `
+        <div style="margin-bottom:0.55rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.73rem;margin-bottom:3px">
+            <span style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${k}">${k}</span>
+            <strong style="color:var(--navy);min-width:18px;text-align:right">${v}</strong>
+          </div>
+          <div style="height:7px;background:var(--gray-200);border-radius:4px;overflow:hidden">
+            <div style="height:100%;width:${(v/maxV*100).toFixed(0)}%;background:linear-gradient(90deg,${colorFrom},${colorTo});border-radius:4px;transition:width 0.6s ease"></div>
+          </div>
+        </div>
+      `).join('')
+      : '<div style="color:var(--gray-400);font-size:0.8rem;padding:0.5rem 0">Belum ada data</div>';
+  }
+
+  // Chart: Perusahaan
+  const perusahaan = {};
+  alumni.forEach(a => { if(a.perusahaan) perusahaan[a.perusahaan] = (perusahaan[a.perusahaan]||0)+1; });
+  buildBarChart('chartPerusahaan', perusahaan, '#0B2444', '#163970');
+
+  // Chart: Lokasi Kerja
+  const lokasi = {};
+  alumni.forEach(a => { if(a.kota_kerja) lokasi[a.kota_kerja] = (lokasi[a.kota_kerja]||0)+1; });
+  buildBarChart('chartLokasiKerja', lokasi, '#C8973A', '#E8B84B');
+
+  // Chart: Bidang Kerja
+  const bidang = {};
+  alumni.forEach(a => { if(a.bidang) bidang[a.bidang] = (bidang[a.bidang]||0)+1; });
+  buildBarChart('chartBidang', bidang, '#059669', '#34D399');
+}
+
+// ===========================
+// ALUMNI TABLE
+// ===========================
+let alumniPage = 1;
+const ROWS_PER_PAGE = 10;
+
+function renderAlumniTable() {
+  const filter = (document.getElementById('alumniFilter')||{value:''}).value.toLowerCase();
+  const filterP = (document.getElementById('filterProv')||{value:''}).value;
+  const filterJ = (document.getElementById('filterPekerjaan')||{value:''}).value;
+  
+  let data = DB.get('alumni').filter(a => {
+    const match = !filter || a.nama.toLowerCase().includes(filter) || (a.dom_kota||'').toLowerCase().includes(filter) || (a.nim||'').toLowerCase().includes(filter) || (a.perusahaan||'').toLowerCase().includes(filter);
+    const matchP = !filterP || a.dom_prov === filterP;
+    const matchJ = !filterJ || a.pekerjaan === filterJ;
+    return match && matchP && matchJ;
+  });
+
+  const total = data.length;
+  const start = (alumniPage-1)*ROWS_PER_PAGE;
+  const page = data.slice(start, start+ROWS_PER_PAGE);
+
+  document.getElementById('alumniTableBody').innerHTML = page.map((a,i) => `
+    <tr>
+      <td>${start+i+1}</td>
+      <td><div class="td-user"><div class="td-avatar">${a.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div><div><div class="td-name">${a.nama}</div><div class="td-sub">${a.nim||'—'}</div></div></div></td>
+      <td><div class="td-name">${a.dom_kota}</div><div class="td-sub">${a.dom_prov}</div></td>
+      <td><span class="badge badge-alumni">${a.pekerjaan}</span></td>
+      <td>${a.perusahaan||'—'}</td>
+      <td>${a.bidang||'—'}</td>
+      <td><span class="badge ${a.status==='active'?'badge-active':'badge-inactive'}">${a.status==='active'?'Aktif':'Tidak Aktif'}</span></td>
+      <td>
+        <button class="action-btn action-view" onclick="viewAlumniDetail(${a.id})">Detail</button>
+        ${currentUser&&currentUser.role!=='alumni'?`<button class="action-btn action-delete" onclick="deleteAlumni(${a.id})">Hapus</button>`:''}
+      </td>
+    </tr>
+  `).join('') || '<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--gray-400)">Tidak ada data alumni ditemukan</td></tr>';
+
+  document.getElementById('alumniPagInfo').textContent = `Menampilkan ${Math.min(start+1,total)}–${Math.min(start+ROWS_PER_PAGE,total)} dari ${total} alumni`;
+  
+  const totalPages = Math.ceil(total/ROWS_PER_PAGE);
+  let pagBtns = `<button class="page-btn" onclick="setAlumniPage(${alumniPage-1})" ${alumniPage<=1?'disabled':''}>← Prev</button>`;
+  for (let i=1;i<=totalPages;i++) {
+    pagBtns += `<button class="page-btn ${i===alumniPage?'active':''}" onclick="setAlumniPage(${i})">${i}</button>`;
+  }
+  pagBtns += `<button class="page-btn" onclick="setAlumniPage(${alumniPage+1})" ${alumniPage>=totalPages?'disabled':''}>Next →</button>`;
+  document.getElementById('alumniPagBtns').innerHTML = pagBtns;
+}
+
+function setAlumniPage(p) {
+  const total = DB.get('alumni').length;
+  const maxP = Math.ceil(total/ROWS_PER_PAGE);
+  if (p < 1 || p > maxP) return;
+  alumniPage = p;
+  renderAlumniTable();
+}
+
+function viewAlumniDetail(id) {
+  const a = DB.find('alumni', x => x.id === id);
+  if (!a) return;
+  document.getElementById('alumniDetailContent').innerHTML = `
+    <div class="alumni-profile-header">
+      <div class="alumni-profile-avatar">${a.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div>
+      <div class="alumni-profile-info">
+        <h2>${a.nama}</h2>
+        <p>NIM: ${a.nim||'—'} &nbsp;·&nbsp; ${a.email||'—'} &nbsp;·&nbsp; ${a.wa||'—'}</p>
+        <div style="margin-top:0.5rem"><span class="badge badge-active">Alumni Aktif</span> <span class="badge badge-alumni" style="margin-left:4px">${a.pekerjaan}</span></div>
+      </div>
+    </div>
+    <div class="profile-detail-grid">
+      <div class="detail-item"><label>Asal Daerah</label><p>${a.asal||'—'}</p></div>
+      <div class="detail-item"><label>Domisili (KTP)</label><p>${a.dom_kota}, ${a.dom_prov}</p></div>
+      <div class="detail-item"><label>Alamat KTP</label><p>${a.dom_alamat||'—'}</p></div>
+      <div class="detail-item"><label>Tempat Tinggal</label><p>${a.same_address?'Sama dengan KTP':`${a.tinggal_kota}, ${a.tinggal_prov}`}</p></div>
+      <div class="detail-item"><label>Perusahaan / Instansi</label><p>${a.perusahaan||'—'}</p></div>
+      <div class="detail-item"><label>Bidang Pekerjaan</label><p>${a.bidang||'—'}</p></div>
+      <div class="detail-item"><label>Jabatan</label><p>${a.jabatan||'—'}</p></div>
+      <div class="detail-item"><label>Kota Bekerja</label><p>${a.kota_kerja||'—'}</p></div>
+      <div class="detail-item"><label>Terdaftar</label><p>${formatDate(a.created_at)}</p></div>
+    </div>
+  `;
+  openModal('alumniDetailModal');
+}
+
+function deleteAlumni(id) {
+  if (!confirm('Hapus data alumni ini?')) return;
+  DB.delete('alumni', id);
+  renderAlumniTable();
+  renderDashboard();
+}
+
+function exportCSV() {
+  const alumni = DB.get('alumni');
+  const headers = ['Nama','NIM','Email','WA','Asal','Provinsi KTP','Kota KTP','Alamat KTP','Tempat Tinggal Saat Ini','Pekerjaan','Perusahaan','Bidang','Jabatan','Kota Kerja','Terdaftar'];
+  const rows = alumni.map(a => [
+    a.nama, a.nim||'', a.email||'', a.wa||'', a.asal, a.dom_prov, a.dom_kota, a.dom_alamat,
+    a.same_address ? `${a.dom_kota}, ${a.dom_prov}` : `${a.tinggal_kota}, ${a.tinggal_prov}`,
+    a.pekerjaan, a.perusahaan||'', a.bidang||'', a.jabatan||'', a.kota_kerja||'',
+    formatDate(a.created_at)
+  ].map(v => `"${v}"`).join(','));
+  const csv = [headers.join(','), ...rows].join('\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'alumni-tp-undip-2016.csv'; a.click();
+}
+
+// ===========================
+// ARTICLES
+// ===========================
+let editingArticleId = null;
+let articleImageData = '';
+
+function renderArticlesTable() {
+  const articles = DB.get('articles');
+  document.getElementById('articlesTableBody').innerHTML = articles.map(a => `
+    <tr>
+      <td><div class="td-name">${a.judul}</div></td>
+      <td><span class="badge badge-admin">${a.kategori}</span></td>
+      <td>${a.penulis}</td>
+      <td>${formatDate(a.created_at)}</td>
+      <td>
+        <button class="action-btn action-edit" onclick="editArticle(${a.id})">Edit</button>
+        <button class="action-btn action-delete" onclick="deleteArticle(${a.id})">Hapus</button>
+      </td>
+    </tr>
+  `).join('') || '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--gray-400)">Belum ada artikel</td></tr>';
+}
+
+function openArticleModal(id) {
+  editingArticleId = null;
+  articleImageData = '';
+  document.getElementById('art_judul').value = '';
+  document.getElementById('art_konten').value = '';
+  document.getElementById('art_kategori').value = 'Karir & Pekerjaan';
+  document.getElementById('articleModalTitle').textContent = 'Tulis Artikel Baru';
+  document.getElementById('articleImgPrev').innerHTML = `
+    <div class="img-placeholder"><div style="font-size:2rem">📷</div><div>Klik untuk unggah gambar sampul</div></div>
+    <input type="file" id="articleImgInput" accept="image/*" style="display:none" onchange="previewArticleImg(event)">
+  `;
+  openModal('articleModal');
+}
+
+function editArticle(id) {
+  const a = DB.find('articles', x => x.id === id);
+  if (!a) return;
+  editingArticleId = id;
+  articleImageData = a.image || '';
+  document.getElementById('art_judul').value = a.judul;
+  document.getElementById('art_konten').value = a.konten;
+  document.getElementById('art_kategori').value = a.kategori;
+  document.getElementById('articleModalTitle').textContent = 'Edit Artikel';
+  if (a.image) {
+    document.getElementById('articleImgPrev').innerHTML = `
+      <img src="${a.image}">
+      <input type="file" id="articleImgInput" accept="image/*" style="display:none" onchange="previewArticleImg(event)">
+    `;
+  }
+  openModal('articleModal');
+}
+
+function previewArticleImg(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    articleImageData = ev.target.result;
+    document.getElementById('articleImgPrev').innerHTML = `<img src="${articleImageData}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><input type="file" id="articleImgInput" accept="image/*" style="display:none" onchange="previewArticleImg(event)">`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveArticle() {
+  const judul = document.getElementById('art_judul').value.trim();
+  const konten = document.getElementById('art_konten').value.trim();
+  if (!judul || !konten) { alert('Judul dan isi artikel wajib diisi!'); return; }
+  
+  if (editingArticleId) {
+    DB.update('articles', editingArticleId, {
+      judul, konten, image: articleImageData,
+      kategori: document.getElementById('art_kategori').value
+    });
+  } else {
+    DB.insert('articles', {
+      judul, konten, image: articleImageData,
+      kategori: document.getElementById('art_kategori').value,
+      penulis: currentUser ? currentUser.nama : 'Admin'
+    });
+  }
+  closeModal('articleModal');
+  renderArticlesTable();
+  renderNewsGrid();
+}
+
+function deleteArticle(id) {
+  if (!confirm('Hapus artikel ini?')) return;
+  DB.delete('articles', id);
+  renderArticlesTable();
+  renderNewsGrid();
+}
+
+// ===========================
+// USERS
+// ===========================
+let userTabFilter = 'all';
+function filterUserTab(f, btn) {
+  userTabFilter = f;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderUsersTable();
+}
+
+function renderUsersTable() {
+  let users = DB.get('users');
+  if (userTabFilter !== 'all') users = users.filter(u => u.role === userTabFilter);
+  const roleMap = {master_admin:'Master Admin', admin:'Admin', alumni:'Alumni'};
+  const badgeMap = {master_admin:'badge-master', admin:'badge-admin', alumni:'badge-alumni'};
+  
+  document.getElementById('usersTableBody').innerHTML = users.map(u => `
+    <tr>
+      <td><div class="td-user"><div class="td-avatar">${u.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div><div><div class="td-name">${u.nama}</div></div></div></td>
+      <td><code style="background:var(--gray-100);padding:2px 8px;border-radius:5px;font-size:0.78rem">${u.username||'—'}</code></td>
+      <td>${u.email}</td>
+      <td><span class="badge ${badgeMap[u.role]||'badge-alumni'}">${roleMap[u.role]||u.role}</span></td>
+      <td><span class="badge ${u.status==='active'?'badge-active':'badge-inactive'}">${u.status==='active'?'Aktif':'Nonaktif'}</span></td>
+      <td>${formatDate(u.created_at)}</td>
+      <td>
+        ${u.id!==1001?`<button class="action-btn action-edit" onclick="toggleUserStatus(${u.id})">${u.status==='active'?'Nonaktifkan':'Aktifkan'}</button>`:''}
+        ${u.id!==currentUser?.id&&u.id!==1001?`<button class="action-btn action-delete" onclick="deleteUser(${u.id})">Hapus</button>`:''}
+      </td>
+    </tr>
+  `).join('') || '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--gray-400)">Tidak ada user</td></tr>';
+}
+
+function openUserModal() { openModal('userModal'); }
+function saveUser() {
+  const nama = document.getElementById('usr_nama').value.trim();
+  const email = document.getElementById('usr_email').value.trim();
+  const role = document.getElementById('usr_role').value;
+  const pass = document.getElementById('usr_pass').value;
+  if (!nama||!email||!pass) { alert('Semua field wajib diisi!'); return; }
+  const exists = DB.find('users', u => u.email === email);
+  if (exists) { alert('Email sudah terdaftar!'); return; }
+  // Generate username from nama
+  const username = nama.toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'') + Math.floor(Math.random()*100);
+  DB.insert('users', { nama, username, email, password:pass, role, status:'active' });
+  closeModal('userModal');
+  renderUsersTable();
+}
+function toggleUserStatus(id) {
+  const u = DB.find('users', x => x.id === id);
+  if (!u) return;
+  DB.update('users', id, { status: u.status === 'active' ? 'inactive' : 'active' });
+  renderUsersTable();
+}
+function deleteUser(id) {
+  if (!confirm('Hapus user ini?')) return;
+  DB.delete('users', id);
+  renderUsersTable();
+}
+
+// ===========================
+// MY PROFILE (Alumni)
+// ===========================
+function renderMyProfile() {
+  if (!currentUser) return;
+  const a = DB.find('alumni', x => x.id === currentUser.alumni_id);
+  if (!a) {
+    document.getElementById('myProfileContent').innerHTML = `<div style="text-align:center;padding:3rem;color:var(--gray-400)"><div style="font-size:3rem">👤</div><p style="margin-top:1rem">Data alumni tidak ditemukan.</p></div>`;
+    return;
+  }
+  document.getElementById('myProfileContent').innerHTML = `
+    <div class="alumni-profile-header">
+      <div class="alumni-profile-avatar">${a.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div>
+      <div class="alumni-profile-info">
+        <h2>${a.nama}</h2>
+        <p>${a.jabatan||'Alumni'} &nbsp;·&nbsp; ${a.perusahaan||'—'}</p>
+        <div style="margin-top:0.5rem"><span class="badge badge-active">Alumni Aktif</span></div>
+      </div>
+    </div>
+    <div class="profile-detail-grid">
+      <div class="detail-item"><label>NIM</label><p>${a.nim||'—'}</p></div>
+      <div class="detail-item"><label>Email</label><p>${a.email||'—'}</p></div>
+      <div class="detail-item"><label>WhatsApp</label><p>${a.wa||'—'}</p></div>
+      <div class="detail-item"><label>Asal Daerah</label><p>${a.asal||'—'}</p></div>
+      <div class="detail-item"><label>Domisili KTP</label><p>${a.dom_kota}, ${a.dom_prov}</p></div>
+      <div class="detail-item"><label>Tempat Tinggal</label><p>${a.same_address?'Sama dengan KTP':`${a.tinggal_kota}, ${a.tinggal_prov}`}</p></div>
+      <div class="detail-item"><label>Pekerjaan</label><p>${a.pekerjaan||'—'}</p></div>
+      <div class="detail-item"><label>Bidang</label><p>${a.bidang||'—'}</p></div>
+    </div>
+  `;
+}
+
+// ===========================
+// NEWS GRID (Landing)
+// ===========================
+function renderNewsGrid() {
+  const articles = DB.get('articles').slice(-6).reverse();
+  const catColors = {
+    'Prestasi Alumni':'#DBEAFE','Karir & Pekerjaan':'#FEF3C7',
+    'Kegiatan Alumni':'#DCFCE7','Informasi Industri':'#F3E8FF','Pengumuman':'#FEE2E2'
+  };
+  
+  if (articles.length === 0) {
+    document.getElementById('newsGrid').innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--gray-400)">Belum ada artikel. Login sebagai admin untuk membuat artikel.</div>`;
+    return;
+  }
+
+  document.getElementById('newsGrid').innerHTML = articles.map((a,i) => `
+    <div class="news-card ${i===0?'featured':''}">
+      <div class="news-img news-img-placeholder" style="height:${i===0?'260px':'160px'}">
+        ${a.image ? `<img src="${a.image}" style="width:100%;height:100%;object-fit:cover">` : `<span style="opacity:0.3;font-family:var(--font-display);font-size:${i===0?'3.5rem':'2rem'};color:white">TP</span>`}
+      </div>
+      <div class="news-body">
+        <div class="news-cat">${a.kategori}</div>
+        <div class="news-title">${a.judul}</div>
+        ${i===0?`<div class="news-excerpt">${a.konten.substring(0,120)}...</div>`:''}
+        <div class="news-meta">
+          <span>${a.penulis}</span>
+          <span>${formatDate(a.created_at)}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===========================
+// PUBLIC SEARCH
+// ===========================
+function searchAlumniPublic() {
+  const q = document.getElementById('publicSearchInput').value.toLowerCase();
+  if (q.length < 2) { document.getElementById('publicSearchResults').innerHTML = ''; return; }
+  const results = DB.get('alumni').filter(a =>
+    a.nama.toLowerCase().includes(q) || (a.dom_kota||'').toLowerCase().includes(q) ||
+    (a.pekerjaan||'').toLowerCase().includes(q) || (a.bidang||'').toLowerCase().includes(q)
+  ).slice(0,8);
+  renderPublicSearchResults('publicSearchResults', results);
+}
+
+function searchAlumniPage() {
+  const q = (document.getElementById('searchPageInput')||{value:''}).value.toLowerCase();
+  const prov = (document.getElementById('searchProv')||{value:''}).value;
+  const results = DB.get('alumni').filter(a => {
+    const matchQ = !q || a.nama.toLowerCase().includes(q) || (a.dom_kota||'').toLowerCase().includes(q) || (a.pekerjaan||'').toLowerCase().includes(q);
+    const matchP = !prov || a.dom_prov === prov;
+    return matchQ && matchP;
+  });
+  renderPublicSearchResults('searchPageResults', results);
+}
+
+function renderPublicSearchResults(containerId, results) {
+  const container = document.getElementById(containerId);
+  if (!results.length) {
+    container.innerHTML = `<div style="color:rgba(255,255,255,0.5);text-align:center;padding:1.5rem;font-size:0.85rem">Tidak ada alumni ditemukan.</div>`;
+    return;
+  }
+  container.innerHTML = results.map(a => `
+    <div class="alumni-card" onclick="viewAlumniDetailPublic(${a.id})">
+      <div class="alumni-card-avatar">${a.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div>
+      <h4>${a.nama}</h4>
+      <p>${a.dom_kota}, ${a.dom_prov}<br>${a.perusahaan||a.pekerjaan}</p>
+      <span class="tag">${a.bidang||a.pekerjaan}</span>
+    </div>
+  `).join('');
+}
+
+function viewAlumniDetailPublic(id) {
+  const a = DB.find('alumni', x => x.id === id);
+  if (!a) return;
+  document.getElementById('alumniDetailContent').innerHTML = `
+    <div class="alumni-profile-header">
+      <div class="alumni-profile-avatar">${a.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div>
+      <div class="alumni-profile-info">
+        <h2>${a.nama}</h2>
+        <p>${a.jabatan||'Alumni'} &nbsp;·&nbsp; ${a.perusahaan||'—'}</p>
+        <div style="margin-top:0.5rem"><span class="badge badge-active">Alumni Aktif</span> <span class="badge badge-alumni" style="margin-left:4px">${a.pekerjaan}</span></div>
+      </div>
+    </div>
+    <div class="profile-detail-grid">
+      <div class="detail-item"><label>Kota</label><p>${a.dom_kota}, ${a.dom_prov}</p></div>
+      <div class="detail-item"><label>Perusahaan</label><p>${a.perusahaan||'—'}</p></div>
+      <div class="detail-item"><label>Bidang Pekerjaan</label><p>${a.bidang||'—'}</p></div>
+      <div class="detail-item"><label>Kota Bekerja</label><p>${a.kota_kerja||'—'}</p></div>
+    </div>
+  `;
+  openModal('alumniDetailModal');
+}
+
+// ===========================
+// REGISTRATION
+// ===========================
+function selectPekerjaan(label, val) {
+  document.querySelectorAll('.radio-item').forEach(el => el.classList.remove('selected'));
+  label.classList.add('selected');
+  const wrap = document.getElementById('pekerjaan_lainnya_wrap');
+  if (wrap) wrap.style.display = val === 'Lainnya' ? '' : 'none';
+}
+
+function toggleSameAddress() {
+  const checked = document.getElementById('reg_same_address').checked;
+  document.getElementById('tinggal_form').style.display = checked ? 'none' : '';
+}
+
+function submitRegistration() {
+  const nama = document.getElementById('reg_nama').value.trim();
+  const email = document.getElementById('reg_email').value.trim();
+  const asal = document.getElementById('reg_asal').value.trim();
+  const dom_prov = document.getElementById('reg_dom_prov').value;
+  const dom_kota = document.getElementById('reg_dom_kota').value;
+  const dom_alamat = document.getElementById('reg_dom_alamat').value.trim();
+  const pekerjaanEl = document.querySelector('input[name="pekerjaan"]:checked');
+  const pass = document.getElementById('reg_pass').value;
+  const pass2 = document.getElementById('reg_pass2').value;
+
+  if (!nama||!asal||!dom_prov||!dom_kota||!dom_alamat) { alert('Data diri dan domisili wajib dilengkapi!'); return; }
+  if (!pekerjaanEl) { alert('Pilih status pekerjaan Anda!'); return; }
+  let pekerjaanVal = pekerjaanEl.value;
+  if (pekerjaanVal === 'Lainnya') {
+    const custom = document.getElementById('reg_pekerjaan_lainnya').value.trim();
+    if (!custom) { alert('Mohon isi jenis pekerjaan lainnya!'); return; }
+    pekerjaanVal = custom;
+  }
+  if (!pass||pass.length<6) { alert('Password minimal 6 karakter!'); return; }
+  if (pass !== pass2) { alert('Konfirmasi password tidak sesuai!'); return; }
+  if (email && DB.find('users', u => u.email === email)) { alert('Email sudah terdaftar!'); return; }
+
+  const sameAddr = document.getElementById('reg_same_address').checked;
+  const alumni = DB.insert('alumni', {
+    nama, nim: document.getElementById('reg_nim').value,
+    asal, email, wa: document.getElementById('reg_wa').value,
+    dom_prov, dom_kota, dom_alamat,
+    same_address: sameAddr,
+    tinggal_prov: sameAddr ? dom_prov : document.getElementById('reg_tinggal_prov').value,
+    tinggal_kota: sameAddr ? dom_kota : document.getElementById('reg_tinggal_kota').value,
+    tinggal_alamat: sameAddr ? dom_alamat : document.getElementById('reg_tinggal_alamat').value,
+    pekerjaan: pekerjaanVal,
+    perusahaan: document.getElementById('reg_perusahaan').value,
+    bidang: document.getElementById('reg_bidang').value,
+    jabatan: document.getElementById('reg_jabatan').value,
+    kota_kerja: document.getElementById('reg_kota_kerja').value,
+    status: 'active'
+  });
+
+  if (email) {
+    const username = nama.toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'');
+    DB.insert('users', { nama, username, email, password: pass, role: 'alumni', status: 'active', alumni_id: alumni.id });
+  }
+
+  document.getElementById('registerSuccess').classList.add('show');
+  document.getElementById('registerSuccess').scrollIntoView({behavior:'smooth'});
+  // Reset
+  document.querySelectorAll('.form-card input, .form-card select, .form-card textarea').forEach(el => el.value = '');
+  document.querySelectorAll('.radio-item').forEach(el => el.classList.remove('selected'));
+  updateStats();
+}
+
+// ===========================
+// STATS
+// ===========================
+function updateStats() {
+  const alumni = DB.get('alumni');
+  document.getElementById('statTotal').textContent = alumni.length;
+  const provinces = new Set(alumni.map(a => a.dom_prov).filter(Boolean));
+  document.getElementById('statProv').textContent = provinces.size;
+}
+
+// ===========================
+// MODAL HELPERS
+// ===========================
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); });
+});
+
+// ===========================
+// TOPBAR SEARCH
+// ===========================
+function topbarSearchFn() {
+  const q = document.getElementById('topbarSearch').value.toLowerCase();
+  if (!q) return;
+  // Switch to alumni panel and filter
+  showPanel('alumni');
+  document.getElementById('alumniFilter').value = q;
+  renderAlumniTable();
+}
+
+function filterUserTab(f, btn) {
+  userTabFilter = f;
+  document.querySelectorAll('#panel-users .tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderUsersTable();
+}
+
+// ===========================
+// UTILS
+// ===========================
+function formatDate(d) {
+  if (!d) return '—';
+  const date = new Date(d);
+  return date.toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric'});
+}
+
+// ===========================
+// INIT
+// ===========================
+document.addEventListener('DOMContentLoaded', () => {
+  seedData();
+  populateProvinceSelects();
+  renderNewsGrid();
+  updateStats();
+});
+</script>
+</body>
+</html>
