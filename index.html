@@ -117,7 +117,23 @@ input, select, textarea { font-family: var(--font-body); }
 
 .mobile-toggle {
   display: none; background: none; border: none; color: white;
-  font-size: 1.5rem; cursor: pointer;
+  font-size: 1.5rem; cursor: pointer; order: 3;
+}
+@media (max-width: 900px) {
+  .mobile-toggle { display: block; }
+  .navbar-links {
+    display: none; position: absolute; top: 68px; left: 0; right: 0;
+    background: rgba(11,36,68,0.98); backdrop-filter: blur(12px);
+    flex-direction: column; padding: 0.5rem 1rem 1rem; gap: 0.25rem;
+    border-bottom: 1px solid rgba(200,151,58,0.25);
+  }
+  .navbar-links.open { display: flex; }
+  .navbar-links a { padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; }
+  .navbar-actions { gap: 0.4rem; }
+  .navbar-actions .btn-nav-register { display: none; }
+}
+@media (max-width: 480px) {
+  .navbar-links { top: 56px; }
 }
 
 /* ===========================
@@ -195,6 +211,9 @@ input, select, textarea { font-family: var(--font-body); }
 .hero-right-img {
   width: 100%; height: 100%; object-fit: cover; opacity: 0.35;
   position: absolute; top: 0; left: 0;
+}
+.hero-right svg.hero-right-img {
+  opacity: 0.22;
 }
 .hero-right-overlay {
   position: relative; z-index: 2;
@@ -853,15 +872,70 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
+  .navbar { padding: 0 1rem; }
+  .navbar-links { display: none; }
+  .mobile-toggle { display: block; }
   .landing-hero { grid-template-columns: 1fr; }
-  .hero-right { min-height: 350px; }
+  .hero-left { padding: 3rem 1.5rem 2.5rem; }
+  .hero-title { font-size: 1.8rem; }
+  .hero-subtitle { font-size: 0.85rem; }
+  .hero-cta-group { flex-direction: column; }
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-outline { width: 100%; justify-content: center; }
+  .hero-stats { gap: 1rem; justify-content: center; }
+  .hero-right { min-height: 280px; }
+  .hero-university-card h3 { font-size: 1.05rem; }
+  .hero-university-card p { font-size: 0.75rem; }
+  .hero-right-overlay { padding: 1.5rem; }
+  .section-news { padding: 2.5rem 1.5rem; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .section-title { font-size: 1.5rem; }
   .news-grid { grid-template-columns: 1fr; }
+  .news-card.featured { grid-row: span 1; }
+  .section-search-public { padding: 2.5rem 1.5rem; }
+  .search-hero-box { padding: 2rem 1.5rem; }
+  .search-hero-title { font-size: 1.2rem; }
+  .search-bar { flex-direction: column; }
+  .search-bar .form-select { width: 100% !important; }
   .login-wrap { grid-template-columns: 1fr; }
   .login-left { display: none; }
-  .cpanel-sidebar { transform: translateX(-100%); }
+  .login-right { padding: 1.5rem; }
+  .register-container { padding: 2rem 1rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid.cols-3 { grid-template-columns: 1fr; }
+  .form-card { padding: 1.5rem 1.2rem; }
+  .cpanel-sidebar { transform: translateX(-100%); position: fixed; z-index: 200; }
+  .cpanel-sidebar.open { transform: translateX(0); }
   .cpanel-main { margin-left: 0; }
+  .cpanel-topbar { padding: 0 1rem; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .table-card { overflow-x: auto; }
+  .filter-bar { flex-direction: column; }
+  #panel-dashboard > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .navbar { padding: 0 0.75rem; height: 56px; }
+  .navbar-logo .logo-text strong { font-size: 0.78rem; }
+  .navbar-logo .logo-text span { font-size: 0.58rem; }
+  .navbar-logo img { width: 32px; height: 32px; }
+  .btn-nav-login, .btn-nav-register { padding: 5px 12px; font-size: 0.72rem; }
+  .hero-left { padding: 2rem 1rem 2rem; }
+  .hero-left::before { font-size: 4rem; }
+  .hero-title { font-size: 1.5rem; }
+  .hero-stats { flex-wrap: wrap; gap: 0.75rem; }
+  .stat-num { font-size: 1.2rem; }
+  .hero-right { min-height: 220px; }
+  .hero-university-card { padding: 1rem; }
+  .hero-university-card h3 { font-size: 0.95rem; }
+  .social-btn { width: 28px; height: 28px; font-size: 0.65rem; }
+  .section-news { padding: 2rem 1rem; }
+  .section-search-public { padding: 2rem 1rem; }
+  .search-hero-box { padding: 1.5rem 1rem; border-radius: 14px; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .register-container { padding: 1.5rem 0.75rem; }
+  .form-card { padding: 1.2rem 1rem; }
 }
 
 /* Animations */
@@ -893,15 +967,15 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
       <strong>Teknik Perkapalan</strong>
     </div>
   </div>
-  <div class="navbar-links">
-    <a href="#" onclick="showView('landing')" class="active" id="nav-home">Beranda</a>
-    <a href="#" onclick="showView('search-public')" id="nav-search">Cari Alumni</a>
-    <a href="#" onclick="scrollToNews()" id="nav-news">Berita</a>
-    <a href="#" onclick="showView('register')" id="nav-daftar">Daftar Alumni</a>
+  <div class="navbar-links" id="navLinks">
+    <a href="#" onclick="showView('landing');closeMobileNav()" class="active" id="nav-home">Beranda</a>
+    <a href="#" onclick="showView('search-public');closeMobileNav()" id="nav-search">Cari Alumni</a>
+    <a href="#" onclick="scrollToNews();closeMobileNav()" id="nav-news">Berita</a>
   </div>
   <div class="navbar-actions" id="navActions">
     <button class="btn-nav-login" onclick="showView('login')">Masuk</button>
     <button class="btn-nav-register" onclick="showView('register')">Daftar Sekarang</button>
+    <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
   </div>
 </nav>
 
@@ -940,7 +1014,202 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
       </div>
     </div>
     <div class="hero-right">
-      <img class="hero-right-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Undip-ft.jpg/640px-Undip-ft.jpg" alt="UNDIP" onerror="this.style.display='none'">
+      <!-- Sketsa Widya Puraya (Rektorat UNDIP) -->
+      <svg class="hero-right-img" viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="opacity:0.22;width:100%;height:100%;position:absolute;top:0;left:0;object-fit:cover">
+        <style>
+          .sk{fill:none;stroke:rgba(255,255,255,0.85);stroke-linecap:round;stroke-linejoin:round}
+          .sk1{stroke-width:2}.sk2{stroke-width:1.2}.sk3{stroke-width:0.7}
+          .skf{fill:rgba(255,255,255,0.05);stroke:rgba(255,255,255,0.7);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+          .skf2{fill:rgba(255,255,255,0.08);stroke:rgba(255,255,255,0.6);stroke-width:0.8;stroke-linecap:round;stroke-linejoin:round}
+          .skt{fill:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;letter-spacing:3px;font-weight:600}
+          .skr{fill:rgba(255,255,255,0.07);stroke:rgba(255,255,255,0.75);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+        </style>
+
+        <!-- ===== GROUND LINE ===== -->
+        <path class="sk sk3" d="M0 438 Q200 434 400 436 Q600 438 800 435"/>
+        <path class="sk sk3" d="M0 445 Q300 442 500 444 Q700 446 800 443"/>
+
+        <!-- ===== LARGE TREES (flanking, like photo) ===== -->
+        <!-- Left tree cluster -->
+        <ellipse class="skf" cx="95" cy="260" rx="70" ry="90"/>
+        <ellipse class="skf" cx="55" cy="290" rx="48" ry="65"/>
+        <ellipse class="skf" cx="140" cy="285" rx="45" ry="60"/>
+        <ellipse class="skf" cx="100" cy="230" rx="40" ry="50"/>
+        <line class="sk sk2" x1="90" y1="350" x2="90" y2="438"/>
+        <line class="sk sk2" x1="60" y1="355" x2="60" y2="438"/>
+        <line class="sk sk3" x1="130" y1="345" x2="130" y2="438"/>
+        <!-- Right tree cluster -->
+        <ellipse class="skf" cx="705" cy="260" rx="70" ry="90"/>
+        <ellipse class="skf" cx="745" cy="290" rx="48" ry="65"/>
+        <ellipse class="skf" cx="660" cy="285" rx="45" ry="60"/>
+        <ellipse class="skf" cx="700" cy="230" rx="40" ry="50"/>
+        <line class="sk sk2" x1="710" y1="350" x2="710" y2="438"/>
+        <line class="sk sk2" x1="740" y1="355" x2="740" y2="438"/>
+        <line class="sk sk3" x1="670" y1="345" x2="670" y2="438"/>
+        <!-- Mid trees (behind building) -->
+        <ellipse class="skf" cx="210" cy="230" rx="35" ry="48" style="opacity:0.5"/>
+        <ellipse class="skf" cx="590" cy="228" rx="35" ry="48" style="opacity:0.5"/>
+        <ellipse class="skf" cx="260" cy="260" rx="25" ry="32" style="opacity:0.4"/>
+        <ellipse class="skf" cx="540" cy="258" rx="25" ry="32" style="opacity:0.4"/>
+
+        <!-- ===== MAIN BUILDING BODY (wide, low — 2 stories) ===== -->
+        <rect class="skf" x="175" y="295" width="450" height="105" rx="1"/>
+        <!-- Floor line -->
+        <line class="sk sk3" x1="180" y1="345" x2="620" y2="345"/>
+
+        <!-- Building windows - upper row -->
+        <rect class="skf2" x="195" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="216" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="237" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="258" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="279" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="300" y="302" width="14" height="18" rx="1"/>
+        <!-- gap for center -->
+        <rect class="skf2" x="486" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="507" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="528" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="549" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="570" y="302" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="591" y="302" width="14" height="18" rx="1"/>
+        <!-- Building windows - lower row -->
+        <rect class="skf2" x="195" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="216" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="237" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="258" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="279" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="300" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="486" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="507" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="528" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="549" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="570" y="352" width="14" height="18" rx="1"/>
+        <rect class="skf2" x="591" y="352" width="14" height="18" rx="1"/>
+
+        <!-- ===== CENTRAL ENTRANCE SECTION ===== -->
+        <!-- Central raised section -->
+        <rect class="skf" x="335" y="280" width="130" height="120" rx="1"/>
+        <!-- "UPT PERPUSTAKAAN" sign plate -->
+        <rect class="skf2" x="352" y="286" width="96" height="16" rx="1"/>
+        <text class="skt" x="400" y="298" text-anchor="middle" style="font-size:5px;letter-spacing:2px;opacity:0.7">UPT PERPUSTAKAAN</text>
+        <!-- UNDIP Emblem circle -->
+        <circle class="skf" cx="400" cy="273" r="12"/>
+        <circle class="sk sk3" cx="400" cy="273" r="7"/>
+        <!-- Entrance door -->
+        <rect class="skf2" x="375" y="358" width="50" height="42" rx="1"/>
+        <line class="sk sk3" x1="400" y1="358" x2="400" y2="400"/>
+        <!-- Entrance columns -->
+        <line class="sk sk2" x1="355" y1="310" x2="355" y2="400"/>
+        <line class="sk sk2" x1="445" y1="310" x2="445" y2="400"/>
+        <line class="sk sk2" x1="370" y1="310" x2="370" y2="400"/>
+        <line class="sk sk2" x1="430" y1="310" x2="430" y2="400"/>
+        <!-- Portico beam -->
+        <line class="sk sk1" x1="348" y1="310" x2="452" y2="310"/>
+
+        <!-- ===== MASSIVE JOGLO ROOF (defining feature) ===== -->
+        <!-- Layer 1: Outermost / widest roof eave -->
+        <path class="skr" d="M130 295 L400 138 L670 295"/>
+        <!-- Roof eave overhang line -->
+        <path class="sk sk3" d="M125 298 L400 135 L675 298"/>
+        <!-- Layer 2: Middle roof tier -->
+        <path class="skr" d="M210 248 L400 150 L590 248"/>
+        <!-- Layer 3: Upper roof tier (tumpang sari) -->
+        <path class="skr" d="M280 210 L400 148 L520 210"/>
+        <!-- Layer 4: Top peak / crown -->
+        <path class="skr" d="M330 185 L400 148 L470 185"/>
+        
+        <!-- Roof ridge details / texture lines -->
+        <path class="sk sk3" d="M165 272 L400 143 L635 272" style="opacity:0.4"/>
+        <path class="sk sk3" d="M245 230 L400 149 L555 230" style="opacity:0.4"/>
+        <!-- Horizontal roof layer lines (tile rows) -->
+        <line class="sk sk3" x1="155" y1="280" x2="645" y2="280" style="opacity:0.35"/>
+        <line class="sk sk3" x1="230" y1="255" x2="570" y2="255" style="opacity:0.3"/>
+        <line class="sk sk3" x1="295" y1="220" x2="505" y2="220" style="opacity:0.25"/>
+        <!-- Roof edge ornamental line -->
+        <line class="sk sk3" x1="130" y1="295" x2="670" y2="295"/>
+        <!-- Small ridge cap ornament at peak -->
+        <line class="sk sk2" x1="400" y1="138" x2="400" y2="130"/>
+        <path class="sk sk3" d="M394 130 L400 122 L406 130" fill="rgba(255,255,255,0.06)"/>
+
+        <!-- ===== FLAGPOLE WITH MERAH PUTIH ===== -->
+        <line class="sk sk1" x1="400" y1="55" x2="400" y2="122"/>
+        <!-- Flag (Merah Putih — red-white) -->
+        <path class="sk sk2" d="M400 60 Q414 63 410 66 L400 68" fill="rgba(255,255,255,0.12)"/>
+        <path class="sk sk2" d="M400 68 Q414 71 410 74 L400 76" fill="rgba(255,255,255,0.05)"/>
+        <!-- Flagpole base -->
+        <rect class="skf2" x="397" y="120" width="6" height="10" rx="1"/>
+
+        <!-- ===== HORSE STATUE (Pangeran Diponegoro) ===== -->
+        <!-- Pedestal base -->
+        <rect class="skf" x="372" y="418" width="56" height="20" rx="1"/>
+        <rect class="skf" x="378" y="410" width="44" height="10" rx="1"/>
+        <!-- Pedestal column -->
+        <rect class="skf" x="385" y="388" width="30" height="24" rx="1"/>
+        <!-- Horse body - rearing up -->
+        <path class="sk sk1" d="M395 388 Q392 372 390 360 Q388 350 394 342 L402 340 Q410 345 412 355 Q414 365 410 378 Q408 385 405 388" fill="rgba(255,255,255,0.08)"/>
+        <!-- Horse head -->
+        <path class="sk sk2" d="M394 342 Q390 335 388 328 Q387 322 392 320 L396 322 Q398 328 398 334 L394 342"/>
+        <!-- Horse ears -->
+        <path class="sk sk3" d="M391 320 L389 314 L393 318"/>
+        <path class="sk sk3" d="M394 319 L394 313 L397 318"/>
+        <!-- Horse mane -->
+        <path class="sk sk3" d="M394 325 Q396 330 398 336 Q400 340 402 340"/>
+        <!-- Horse front legs (rearing) -->
+        <path class="sk sk2" d="M393 355 Q388 348 386 340"/>
+        <path class="sk sk2" d="M398 353 Q394 346 393 340"/>
+        <!-- Horse rear legs (standing) -->
+        <path class="sk sk2" d="M406 380 L404 388"/>
+        <path class="sk sk2" d="M410 378 L412 388"/>
+        <!-- Horse tail -->
+        <path class="sk sk3" d="M412 360 Q418 365 420 375 Q418 380 414 382"/>
+        <!-- Rider silhouette -->
+        <path class="sk sk2" d="M396 340 L396 326 Q398 320 400 318 L400 325" fill="rgba(255,255,255,0.06)"/>
+        <!-- Rider arm with sword -->
+        <path class="sk sk3" d="M398 322 Q404 316 406 310 L408 304"/>
+
+        <!-- ===== FRONT STONE WALL / GATE ===== -->
+        <!-- Left wall -->
+        <rect class="skf" x="220" y="430" width="145" height="8" rx="0"/>
+        <rect class="skf" x="225" y="425" width="135" height="7" rx="0"/>
+        <!-- Right wall -->
+        <rect class="skf" x="435" y="430" width="145" height="8" rx="0"/>
+        <rect class="skf" x="440" y="425" width="135" height="7" rx="0"/>
+        <!-- "UNIVERSITAS DIPONEGORO" text on left wall -->
+        <text class="skt" x="292" y="435" text-anchor="middle" style="font-size:5.5px;letter-spacing:2.5px">UNIVERSITAS DIPONEGORO</text>
+        <!-- "WIDYA PURAYA" text on right wall -->
+        <text class="skt" x="508" y="435" text-anchor="middle" style="font-size:5.5px;letter-spacing:2.5px">WIDYA PURAYA</text>
+
+        <!-- ===== FRONT STEPS & PATH ===== -->
+        <!-- Steps to entrance -->
+        <path class="skf2" d="M360 400 L440 400 L440 406 L360 406 Z"/>
+        <path class="skf2" d="M355 406 L445 406 L445 412 L355 412 Z"/>
+        <!-- Walkway to statue -->
+        <path class="sk sk3" d="M365 412 L375 438"/>
+        <path class="sk sk3" d="M435 412 L425 438"/>
+
+        <!-- ===== LANDSCAPING / BUSHES ===== -->
+        <!-- Front garden bushes left -->
+        <ellipse class="skf" cx="270" cy="410" rx="30" ry="16" style="opacity:0.5"/>
+        <ellipse class="skf" cx="310" cy="415" rx="22" ry="12" style="opacity:0.4"/>
+        <ellipse class="skf" cx="240" cy="418" rx="18" ry="10" style="opacity:0.35"/>
+        <!-- Front garden bushes right -->
+        <ellipse class="skf" cx="530" cy="410" rx="30" ry="16" style="opacity:0.5"/>
+        <ellipse class="skf" cx="490" cy="415" rx="22" ry="12" style="opacity:0.4"/>
+        <ellipse class="skf" cx="560" cy="418" rx="18" ry="10" style="opacity:0.35"/>
+        <!-- Small palm trees near building -->
+        <line class="sk sk3" x1="200" y1="370" x2="200" y2="400" style="opacity:0.5"/>
+        <path class="sk sk3" d="M200 370 Q190 360 182 362" style="opacity:0.4"/>
+        <path class="sk sk3" d="M200 370 Q210 360 218 362" style="opacity:0.4"/>
+        <path class="sk sk3" d="M200 370 Q195 358 190 355" style="opacity:0.4"/>
+        <path class="sk sk3" d="M200 370 Q205 358 210 355" style="opacity:0.4"/>
+        <line class="sk sk3" x1="600" y1="370" x2="600" y2="400" style="opacity:0.5"/>
+        <path class="sk sk3" d="M600 370 Q590 360 582 362" style="opacity:0.4"/>
+        <path class="sk sk3" d="M600 370 Q610 360 618 362" style="opacity:0.4"/>
+        <path class="sk sk3" d="M600 370 Q595 358 590 355" style="opacity:0.4"/>
+        <path class="sk sk3" d="M600 370 Q605 358 610 355" style="opacity:0.4"/>
+
+        <!-- ===== ROAD / FOREGROUND ===== -->
+        <path class="sk sk3" d="M180 448 Q400 462 620 448" style="opacity:0.35"/>
+      </svg>
       <div class="hero-dots">
         <span></span><span></span><span></span><span></span><span></span>
         <span></span><span></span><span></span><span></span><span></span>
@@ -951,10 +1220,9 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
           <h3>Universitas Diponegoro</h3>
           <p>Teknik Perkapalan — Fakultas Teknik<br>Angkatan 2016 · Semarang, Jawa Tengah</p>
           <div class="hero-social" style="margin-top:1rem">
-            <div class="social-btn">fb</div>
-            <div class="social-btn">ig</div>
-            <div class="social-btn">yt</div>
-            <div class="social-btn">wa</div>
+            <a class="social-btn" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -1002,7 +1270,7 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
         <div style="margin-top: 3rem;">
           <div class="footer-contact-label" style="font-size: 0.65rem">ATAU EMAIL KAMI DI</div>
           <div class="footer-email-box">
-            alumni.tp2016@undip.ac.id
+            <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d6c617860636423797d3f3d3c3b4d786369647d236c6e236469">[email&#160;protected]</a>
             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" style="margin-left: 5px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
           </div>
         </div>
@@ -1034,14 +1302,8 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
     <div class="footer-bottom">
       <div class="footer-copyright">© IKATAN ALUMNI TEKNIK PERKAPALAN UNDIP 2016. SELURUH HAK CIPTA DILINDUNGI.</div>
       <div class="footer-socials">
-        <!-- Facebook -->
-        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-        <!-- Twitter -->
-        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
         <!-- Instagram -->
-        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <!-- LinkedIn -->
-        <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
       </div>
     </div>
   </footer>
@@ -1558,11 +1820,11 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
           </div>
           <div class="form-group">
             <label class="form-label">Supabase Project URL</label>
-            <input class="form-input" placeholder="https://xxxx.supabase.co" id="set_supa_url">
+            <input class="form-input" placeholder="https://qsexlgladbkeofhwgphp.supabase.co" id="set_supa_url">
           </div>
           <div class="form-group">
             <label class="form-label">Supabase Anon / API Key</label>
-            <input class="form-input" type="password" placeholder="eyJh..." id="set_supa_key">
+            <input class="form-input" type="password" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzZXhsZ2xhZGJrZW9maHdncGhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5ODUwNjEsImV4cCI6MjA5MTU2MTA2MX0.rMF0H3MnXPktDPWXJhGRqS6e8JLjskX7xgay2MV1f_4" id="set_supa_key">
           </div>
 
           <button class="btn-sm btn-sm-primary" style="margin-top:1rem" onclick="alert('Pengaturan disimpan!')">Simpan Pengaturan</button>
@@ -1671,7 +1933,7 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
 <!-- ===========================
      JAVASCRIPT
 =========================== -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ===========================
 // DATA LAYER (localStorage SQL simulation)
 // ===========================
@@ -1863,6 +2125,7 @@ function doLogout() {
   document.getElementById('navActions').innerHTML = `
     <button class="btn-nav-login" onclick="showView('login')">Masuk</button>
     <button class="btn-nav-register" onclick="showView('register')">Daftar Sekarang</button>
+    <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
   `;
 }
 
@@ -2468,6 +2731,16 @@ document.querySelectorAll('.modal-overlay').forEach(m => {
 });
 
 // ===========================
+// MOBILE NAV
+// ===========================
+function toggleMobileNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+// ===========================
 // TOPBAR SEARCH
 // ===========================
 function topbarSearchFn() {
@@ -2493,17 +2766,3 @@ function formatDate(d) {
   if (!d) return '—';
   const date = new Date(d);
   return date.toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric'});
-}
-
-// ===========================
-// INIT
-// ===========================
-document.addEventListener('DOMContentLoaded', () => {
-  seedData();
-  populateProvinceSelects();
-  renderNewsGrid();
-  updateStats();
-});
-</script>
-</body>
-</html>
