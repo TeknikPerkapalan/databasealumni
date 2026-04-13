@@ -63,7 +63,7 @@ input, select, textarea { font-family: var(--font-body); }
 .badge-deleted { background: #FEE2E2; color: #B91C1C; }
 .badge-admin { background: #DBEAFE; color: #1D4ED8; }
 .badge-master { background: #EDE9FE; color: #7C3AED; }
-.badge-alumni { background: #F0FDF4; color: #166534; }
+.badge-member { background: #F0FDF4; color: #166534; }
 
 /* ===========================
    VIEWS SYSTEM
@@ -1270,7 +1270,7 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
         <div style="margin-top: 3rem;">
           <div class="footer-contact-label" style="font-size: 0.65rem">ATAU EMAIL KAMI DI</div>
           <div class="footer-email-box">
-            <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d6c617860636423797d3f3d3c3b4d786369647d236c6e236469">[email&#160;protected]</a>
+            <a href="mailto:alumni.tp2016@undip.ac.id" style="color:var(--gold-light);text-decoration:none">alumni.tp2016@undip.ac.id</a>
             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" style="margin-left: 5px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
           </div>
         </div>
@@ -1371,7 +1371,7 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
           <strong style="color:var(--navy)">Demo Akun:</strong><br>
           🔴 Master Admin: <code>masteradmin</code> / <code>master123</code><br>
           🟡 Admin: <code>admin</code> / <code>admin123</code><br>
-          🟢 Alumni: <code>budisantoso</code> / <code>alumni123</code>
+          🟢 Member: <code>budisantoso</code> / <code>alumni123</code>
         </div>
       </div>
     </div>
@@ -1635,8 +1635,8 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
         <svg viewBox="0 0 24 24" class="icon"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Pengaturan
       </div>
-      <div class="sidebar-section-label alumni-only hidden">Alumni</div>
-      <div class="sidebar-link alumni-only hidden" onclick="showPanel('my-profile')" id="nav-my-profile">
+      <div class="sidebar-section-label member-only hidden">Member</div>
+      <div class="sidebar-link member-only hidden" onclick="showPanel('my-profile')" id="nav-my-profile">
         <svg viewBox="0 0 24 24" class="icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Profil Saya
       </div>
@@ -1775,7 +1775,7 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
             <button class="tab-btn active" onclick="filterUserTab('all',this)">Semua</button>
             <button class="tab-btn" onclick="filterUserTab('master_admin',this)">Master Admin</button>
             <button class="tab-btn" onclick="filterUserTab('admin',this)">Admin</button>
-            <button class="tab-btn" onclick="filterUserTab('alumni',this)">Alumni</button>
+            <button class="tab-btn" onclick="filterUserTab('member',this)">Member</button>
           </div>
           <table>
             <thead><tr><th>User</th><th>Username</th><th>Email</th><th>Role</th><th>Status</th><th>Bergabung</th><th>Aksi</th></tr></thead>
@@ -1827,7 +1827,7 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
             <input class="form-input" type="password" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzZXhsZ2xhZGJrZW9maHdncGhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5ODUwNjEsImV4cCI6MjA5MTU2MTA2MX0.rMF0H3MnXPktDPWXJhGRqS6e8JLjskX7xgay2MV1f_4" id="set_supa_key">
           </div>
 
-          <button class="btn-sm btn-sm-primary" style="margin-top:1rem" onclick="alert('Pengaturan disimpan!')">Simpan Pengaturan</button>
+          <button class="btn-sm btn-sm-primary" style="margin-top:1rem" onclick="saveSettings()">Simpan Pengaturan</button>
         </div>
       </div>
 
@@ -1903,9 +1903,9 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
     <div class="form-group">
       <label class="form-label">Role *</label>
       <select class="form-select" id="usr_role">
+        <option value="member">Member</option>
         <option value="admin">Admin</option>
         <option value="master_admin">Master Admin</option>
-        <option value="alumni">Alumni</option>
       </select>
     </div>
     <div class="form-group">
@@ -1933,9 +1933,37 @@ tbody td { padding: 12px 14px; font-size: 0.83rem; color: var(--gray-800); }
 <!-- ===========================
      JAVASCRIPT
 =========================== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
 // ===========================
-// DATA LAYER (localStorage SQL simulation)
+// SUPABASE CLIENT
+// ===========================
+let supabase = null;
+
+function getSupaConfig() {
+  const url = localStorage.getItem('tp_supa_url') || '';
+  const key = localStorage.getItem('tp_supa_key') || '';
+  return { url, key };
+}
+
+function initSupabase() {
+  const { url, key } = getSupaConfig();
+  if (url && key && window.supabase) {
+    try {
+      supabase = window.supabase.createClient(url, key);
+      console.log('Supabase connected:', url);
+      return true;
+    } catch(e) { console.warn('Supabase init failed:', e); }
+  }
+  supabase = null;
+  return false;
+}
+
+// Table name mapping: localStorage key → Supabase table
+const SUPA_TABLES = { alumni: 'alumni', articles: 'articles', users: 'profiles', settings: 'app_settings' };
+
+// ===========================
+// DATA LAYER (localStorage + Supabase sync)
 // ===========================
 const DB = {
   get(table) {
@@ -1950,19 +1978,63 @@ const DB = {
     row.created_at = new Date().toISOString();
     data.push(row);
     DB.set(table, data);
+    // Sync to Supabase (fire-and-forget)
+    DB._supaInsert(table, row);
     return row;
   },
   update(table, id, updates) {
-    const data = DB.get(table).map(r => r.id === id ? {...r, ...updates} : r);
+    const data = DB.get(table).map(r => r.id === id ? {...r, ...updates, updated_at: new Date().toISOString()} : r);
     DB.set(table, data);
+    DB._supaUpdate(table, id, updates);
   },
   delete(table, id) {
     DB.set(table, DB.get(table).filter(r => r.id !== id));
+    DB._supaDelete(table, id);
   },
   find(table, predicate) {
     return DB.get(table).find(predicate);
+  },
+
+  // --- Supabase sync methods (fire-and-forget) ---
+  async _supaInsert(table, row) {
+    if (!supabase || !SUPA_TABLES[table]) return;
+    try {
+      const { error } = await supabase.from(SUPA_TABLES[table]).insert([row]);
+      if (error) console.warn(`Supa insert ${table}:`, error.message);
+      else console.log(`✓ Synced insert → ${table}`);
+    } catch(e) { console.warn('Supa insert err:', e); }
+  },
+  async _supaUpdate(table, id, updates) {
+    if (!supabase || !SUPA_TABLES[table]) return;
+    try {
+      const { error } = await supabase.from(SUPA_TABLES[table]).update(updates).eq('id', id);
+      if (error) console.warn(`Supa update ${table}:`, error.message);
+      else console.log(`✓ Synced update → ${table}`);
+    } catch(e) { console.warn('Supa update err:', e); }
+  },
+  async _supaDelete(table, id) {
+    if (!supabase || !SUPA_TABLES[table]) return;
+    try {
+      const { error } = await supabase.from(SUPA_TABLES[table]).delete().eq('id', id);
+      if (error) console.warn(`Supa delete ${table}:`, error.message);
+      else console.log(`✓ Synced delete → ${table}`);
+    } catch(e) { console.warn('Supa delete err:', e); }
   }
 };
+
+// Pull all data from Supabase into localStorage
+async function pullFromSupabase() {
+  if (!supabase) return;
+  for (const [local, remote] of Object.entries(SUPA_TABLES)) {
+    try {
+      const { data, error } = await supabase.from(remote).select('*');
+      if (!error && data && data.length > 0) {
+        DB.set(local, data);
+        console.log(`↓ Pulled ${data.length} rows from ${remote}`);
+      }
+    } catch(e) { console.warn(`Pull ${remote} err:`, e); }
+  }
+}
 
 // Seed default data
 function seedData() {
@@ -1972,7 +2044,7 @@ function seedData() {
   const users = [
     { id:1001, nama:'Master Admin', username:'masteradmin', email:'masteradmin@undip.ac.id', password:'master123', role:'master_admin', status:'active', created_at:'2024-01-01' },
     { id:1002, nama:'Admin Sekretariat', username:'admin', email:'admin@undip.ac.id', password:'admin123', role:'admin', status:'active', created_at:'2024-01-01' },
-    { id:1003, nama:'Budi Santoso', username:'budisantoso', email:'alumni@undip.ac.id', password:'alumni123', role:'alumni', status:'active', created_at:'2024-01-15', alumni_id: 2001 },
+    { id:1003, nama:'Budi Santoso', username:'budisantoso', email:'alumni@undip.ac.id', password:'alumni123', role:'member', status:'active', created_at:'2024-01-15', alumni_id: 2001 },
   ];
   DB.set('users', users);
 
@@ -2134,7 +2206,7 @@ function setupCpanel() {
   const av = currentUser.nama.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
   document.getElementById('sidebarAvatar').textContent = av;
   document.getElementById('sidebarName').textContent = currentUser.nama;
-  const roleMap = {master_admin:'Master Admin', admin:'Admin', alumni:'Alumni'};
+  const roleMap = {master_admin:'Master Admin', admin:'Admin', member:'Member'};
   document.getElementById('sidebarRole').textContent = roleMap[currentUser.role] || currentUser.role;
   document.getElementById('navActions').innerHTML = `
     <span style="color:rgba(255,255,255,0.7);font-size:0.82rem">Halo, <strong>${currentUser.nama.split(' ')[0]}</strong></span>
@@ -2146,20 +2218,20 @@ function setupCpanel() {
 function applyRoleUI() {
   if (!currentUser) return;
   const isMaster = currentUser.role === 'master_admin';
-  const isAlumni = currentUser.role === 'alumni';
+  const isMember = currentUser.role === 'member';
   document.querySelectorAll('.master-only').forEach(el => {
     el.style.display = isMaster ? '' : 'none';
   });
-  document.querySelectorAll('.alumni-only').forEach(el => {
-    el.classList.toggle('hidden', !isAlumni);
+  document.querySelectorAll('.member-only').forEach(el => {
+    el.classList.toggle('hidden', !isMember);
   });
   if (!isMaster && !document.getElementById('nav-users')) return;
-  if (isAlumni) {
+  if (isMember) {
     showPanel('my-profile');
     renderMyProfile();
   }
   // Show add alumni btn for admin/master
-  if (!isAlumni) document.getElementById('btnAddAlumni').style.display = '';
+  if (!isMember) document.getElementById('btnAddAlumni').style.display = '';
 }
 
 // ===========================
@@ -2198,7 +2270,7 @@ function renderDashboard() {
     <tr>
       <td><div class="td-user"><div class="td-avatar">${a.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div><div><div class="td-name">${a.nama}</div><div class="td-sub">${a.nim||'-'}</div></div></div></td>
       <td>${a.dom_kota}</td>
-      <td><span class="badge badge-alumni">${a.pekerjaan}</span></td>
+      <td><span class="badge badge-member">${a.pekerjaan}</span></td>
       <td>${formatDate(a.created_at)}</td>
     </tr>
   `).join('');
@@ -2282,13 +2354,13 @@ function renderAlumniTable() {
       <td>${start+i+1}</td>
       <td><div class="td-user"><div class="td-avatar">${a.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div><div><div class="td-name">${a.nama}</div><div class="td-sub">${a.nim||'—'}</div></div></div></td>
       <td><div class="td-name">${a.dom_kota}</div><div class="td-sub">${a.dom_prov}</div></td>
-      <td><span class="badge badge-alumni">${a.pekerjaan}</span></td>
+      <td><span class="badge badge-member">${a.pekerjaan}</span></td>
       <td>${a.perusahaan||'—'}</td>
       <td>${a.bidang||'—'}</td>
       <td><span class="badge ${a.status==='active'?'badge-active':'badge-inactive'}">${a.status==='active'?'Aktif':'Tidak Aktif'}</span></td>
       <td>
         <button class="action-btn action-view" onclick="viewAlumniDetail(${a.id})">Detail</button>
-        ${currentUser&&currentUser.role!=='alumni'?`<button class="action-btn action-delete" onclick="deleteAlumni(${a.id})">Hapus</button>`:''}
+        ${currentUser&&currentUser.role!=='member'?`<button class="action-btn action-delete" onclick="deleteAlumni(${a.id})">Hapus</button>`:''}
       </td>
     </tr>
   `).join('') || '<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--gray-400)">Tidak ada data alumni ditemukan</td></tr>';
@@ -2321,7 +2393,7 @@ function viewAlumniDetail(id) {
       <div class="alumni-profile-info">
         <h2>${a.nama}</h2>
         <p>NIM: ${a.nim||'—'} &nbsp;·&nbsp; ${a.email||'—'} &nbsp;·&nbsp; ${a.wa||'—'}</p>
-        <div style="margin-top:0.5rem"><span class="badge badge-active">Alumni Aktif</span> <span class="badge badge-alumni" style="margin-left:4px">${a.pekerjaan}</span></div>
+        <div style="margin-top:0.5rem"><span class="badge badge-active">Alumni Aktif</span> <span class="badge badge-member" style="margin-left:4px">${a.pekerjaan}</span></div>
       </div>
     </div>
     <div class="profile-detail-grid">
@@ -2470,15 +2542,15 @@ function filterUserTab(f, btn) {
 function renderUsersTable() {
   let users = DB.get('users');
   if (userTabFilter !== 'all') users = users.filter(u => u.role === userTabFilter);
-  const roleMap = {master_admin:'Master Admin', admin:'Admin', alumni:'Alumni'};
-  const badgeMap = {master_admin:'badge-master', admin:'badge-admin', alumni:'badge-alumni'};
+  const roleMap = {master_admin:'Master Admin', admin:'Admin', member:'Member'};
+  const badgeMap = {master_admin:'badge-master', admin:'badge-admin', member:'badge-member'};
   
   document.getElementById('usersTableBody').innerHTML = users.map(u => `
     <tr>
       <td><div class="td-user"><div class="td-avatar">${u.nama.split(' ').map(w=>w[0]).join('').substring(0,2)}</div><div><div class="td-name">${u.nama}</div></div></div></td>
       <td><code style="background:var(--gray-100);padding:2px 8px;border-radius:5px;font-size:0.78rem">${u.username||'—'}</code></td>
       <td>${u.email}</td>
-      <td><span class="badge ${badgeMap[u.role]||'badge-alumni'}">${roleMap[u.role]||u.role}</span></td>
+      <td><span class="badge ${badgeMap[u.role]||'badge-member'}">${roleMap[u.role]||u.role}</span></td>
       <td><span class="badge ${u.status==='active'?'badge-active':'badge-inactive'}">${u.status==='active'?'Aktif':'Nonaktif'}</span></td>
       <td>${formatDate(u.created_at)}</td>
       <td>
@@ -2630,7 +2702,7 @@ function viewAlumniDetailPublic(id) {
       <div class="alumni-profile-info">
         <h2>${a.nama}</h2>
         <p>${a.jabatan||'Alumni'} &nbsp;·&nbsp; ${a.perusahaan||'—'}</p>
-        <div style="margin-top:0.5rem"><span class="badge badge-active">Alumni Aktif</span> <span class="badge badge-alumni" style="margin-left:4px">${a.pekerjaan}</span></div>
+        <div style="margin-top:0.5rem"><span class="badge badge-active">Alumni Aktif</span> <span class="badge badge-member" style="margin-left:4px">${a.pekerjaan}</span></div>
       </div>
     </div>
     <div class="profile-detail-grid">
@@ -2700,7 +2772,7 @@ function submitRegistration() {
 
   if (email) {
     const username = nama.toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9]/g,'');
-    DB.insert('users', { nama, username, email, password: pass, role: 'alumni', status: 'active', alumni_id: alumni.id });
+    DB.insert('users', { nama, username, email, password: pass, role: 'member', status: 'active', alumni_id: alumni.id });
   }
 
   document.getElementById('registerSuccess').classList.add('show');
@@ -2766,3 +2838,87 @@ function formatDate(d) {
   if (!d) return '—';
   const date = new Date(d);
   return date.toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric'});
+}
+
+// ===========================
+// SAVE SETTINGS
+// ===========================
+function saveSettings() {
+  const supaUrl = document.getElementById('set_supa_url').value.trim();
+  const supaKey = document.getElementById('set_supa_key').value.trim();
+
+  // Save portal settings
+  const settings = {
+    nama: document.getElementById('set_nama').value,
+    angkatan: document.getElementById('set_angkatan').value,
+    deskripsi: document.getElementById('set_desc').value,
+    email: document.getElementById('set_email').value,
+    registration: document.getElementById('set_reg').value
+  };
+  DB.set('portal_settings', [settings]);
+
+  // Save Supabase credentials
+  if (supaUrl) localStorage.setItem('tp_supa_url', supaUrl);
+  if (supaKey) localStorage.setItem('tp_supa_key', supaKey);
+
+  // Re-init Supabase if credentials changed
+  if (supaUrl && supaKey) {
+    const connected = initSupabase();
+    if (connected) {
+      // Push current data to Supabase
+      pushToSupabase();
+      alert('Pengaturan disimpan & Supabase terhubung! Data sedang disinkronkan...');
+    } else {
+      alert('Pengaturan disimpan, tapi koneksi Supabase gagal. Periksa URL dan API Key.');
+    }
+  } else {
+    alert('Pengaturan disimpan!');
+  }
+}
+
+// Push all localStorage data to Supabase
+async function pushToSupabase() {
+  if (!supabase) return;
+  for (const [local, remote] of Object.entries(SUPA_TABLES)) {
+    const data = DB.get(local);
+    if (!data.length) continue;
+    try {
+      const { error } = await supabase.from(remote).upsert(data, { onConflict: 'id' });
+      if (error) console.warn(`Push ${remote}:`, error.message);
+      else console.log(`↑ Pushed ${data.length} rows to ${remote}`);
+    } catch(e) { console.warn(`Push ${remote} err:`, e); }
+  }
+}
+
+// ===========================
+// INITIALIZATION
+// ===========================
+async function initApp() {
+  // Seed demo data if fresh
+  seedData();
+
+  // Load Supabase credentials into settings UI
+  const { url, key } = getSupaConfig();
+  if (url) document.getElementById('set_supa_url').value = url;
+  if (key) document.getElementById('set_supa_key').value = key;
+
+  // Connect to Supabase if configured
+  if (url && key) {
+    const connected = initSupabase();
+    if (connected) {
+      await pullFromSupabase();
+    }
+  }
+
+  // Render landing
+  renderNewsGrid();
+  updateStats();
+  showView('landing');
+}
+
+// Run
+initApp();
+
+</script>
+</body>
+</html>
