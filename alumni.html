@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Database Alumni · Portal Alumni Perkapalan UNDIP</title>
+  <meta name="description" content="Telusuri direktori alumni Teknik Perkapalan UNDIP — cari berdasarkan nama, angkatan, lokasi, dan perusahaan." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="bg-[#fafbfc]">
+  <div id="navbar"></div>
+
+  <!-- HEADER -->
+  <section class="bg-navy-950 text-white hero-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <p class="text-gold-400 text-sm font-medium tracking-wide uppercase">Direktori</p>
+      <h1 class="font-display font-semibold text-4xl sm:text-5xl mt-2">Database Alumni</h1>
+      <p class="mt-3 text-slate-300 max-w-2xl">Temukan rekan seangkatan, alumni yang bekerja di perusahaan impian, atau yang tinggal di kota tujuanmu.</p>
+    </div>
+  </section>
+
+  <!-- SEARCH & FILTERS -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10">
+    <div class="bg-white rounded-2xl shadow-soft ring-1 ring-slate-200 p-5 lg:p-6">
+      <div class="grid lg:grid-cols-6 md:grid-cols-2 gap-3">
+        <div class="lg:col-span-2">
+          <label class="label">Cari nama</label>
+          <input id="f-search" type="text" class="input" placeholder="cth. Andi Rahmat" />
+        </div>
+        <div>
+          <label class="label">Angkatan</label>
+          <input id="f-angkatan" type="number" min="1990" max="2030" class="input" placeholder="2016" />
+        </div>
+        <div>
+          <label class="label">Status Kerja</label>
+          <select id="f-status" class="select">
+            <option value="">Semua</option>
+            <option>Bekerja</option>
+            <option>Wirausaha</option>
+            <option>Studi Lanjut</option>
+            <option>Mencari Kerja</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">Lokasi</label>
+          <input id="f-lokasi" type="text" class="input" placeholder="Jakarta, Surabaya…" />
+        </div>
+        <div>
+          <label class="label">Perusahaan</label>
+          <input id="f-perusahaan" type="text" class="input" placeholder="PT PAL, Wintermar…" />
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 mt-4">
+        <button id="btn-apply" class="btn btn-primary">Terapkan Filter</button>
+        <button id="btn-reset" class="btn btn-ghost">Reset</button>
+        <div class="ml-auto flex items-center gap-2">
+          <span id="result-count" class="text-sm text-slate-500">—</span>
+          <button id="btn-csv" class="btn btn-outline text-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Export CSV
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div id="alumni-grid" class="grid lg:grid-cols-3 md:grid-cols-2 gap-5"></div>
+    <div id="pagination" class="flex items-center justify-center gap-2 mt-10"></div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script type="module" src="/src/pages/alumni.js"></script>
+</body>
+</html>

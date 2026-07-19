@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artikel · Portal Alumni Perkapalan UNDIP</title>
+  <meta name="description" content="Artikel, opini, dan cerita dari komunitas Alumni Teknik Perkapalan UNDIP." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="bg-[#fafbfc]">
+  <div id="navbar"></div>
+
+  <section class="bg-navy-950 text-white hero-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <p class="text-gold-400 text-sm font-medium tracking-wide uppercase">Jurnal Komunitas</p>
+      <h1 class="font-display font-semibold text-4xl sm:text-5xl mt-2">Artikel & Cerita</h1>
+      <p class="mt-3 text-slate-300 max-w-2xl">Bacaan dari, oleh, dan untuk alumni — industri maritim, karir, dan kehidupan setelah kampus.</p>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10">
+    <div class="bg-white rounded-2xl shadow-soft ring-1 ring-slate-200 p-5 lg:p-6">
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-3">
+        <div class="lg:col-span-2">
+          <label class="label">Cari artikel</label>
+          <input id="f-search" type="text" class="input" placeholder="cari judul artikel…" />
+        </div>
+        <div>
+          <label class="label">Kategori</label>
+          <select id="f-category" class="select">
+            <option value="">Semua kategori</option>
+          </select>
+        </div>
+        <div class="flex items-end gap-2">
+          <button id="btn-apply" class="btn btn-primary flex-1">Terapkan</button>
+          <button id="btn-reset" class="btn btn-ghost">Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div id="article-grid" class="grid lg:grid-cols-3 md:grid-cols-2 gap-6"></div>
+    <div id="pagination" class="flex items-center justify-center gap-2 mt-10"></div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script type="module" src="/src/pages/articles.js"></script>
+</body>
+</html>

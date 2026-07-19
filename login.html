@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masuk · Portal Alumni TP UNDIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="min-h-screen flex flex-col lg:grid lg:grid-cols-5">
+
+  <!-- Left visual panel (hidden on mobile) -->
+  <aside class="hidden lg:flex lg:col-span-2 relative overflow-hidden hero-gradient text-white p-12 flex-col justify-between">
+    <div>
+      <a href="/" class="inline-flex items-center gap-3">
+        <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 grid place-content-center text-navy-900">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/></svg>
+        </span>
+        <div class="font-display font-semibold text-lg">Portal Alumni TP UNDIP</div>
+      </a>
+    </div>
+    <div>
+      <h1 class="font-display text-4xl xl:text-5xl font-semibold leading-tight">
+        Selamat datang <br/>
+        <span class="italic text-gold-400">kembali, Engineer.</span>
+      </h1>
+      <p class="mt-5 text-slate-300 max-w-md leading-relaxed">
+        Masuk untuk memperbarui profil, menulis artikel, dan terhubung dengan keluarga
+        besar Teknik Perkapalan Universitas Diponegoro.
+      </p>
+    </div>
+    <div class="text-sm text-slate-400">
+      © <span id="year"></span> Alumni Teknik Perkapalan UNDIP
+    </div>
+  </aside>
+
+  <!-- Form -->
+  <main class="lg:col-span-3 flex items-center justify-center p-6 lg:p-12 bg-[#fafbfc]">
+    <div class="w-full max-w-md">
+      <a href="/" class="lg:hidden inline-flex items-center gap-2 text-sm text-navy-700 hover:text-navy-900 mb-8">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+        Kembali ke beranda
+      </a>
+
+      <div class="badge badge-gold">Masuk</div>
+      <h2 class="font-display text-3xl font-semibold text-navy-900 mt-3">Masuk ke akunmu</h2>
+      <p class="text-slate-500 mt-1.5 text-sm">Gunakan email dan password yang terdaftar.</p>
+
+      <form id="login-form" class="mt-8 space-y-5">
+        <div>
+          <label class="label" for="email">Email</label>
+          <input type="email" id="email" name="email" class="input" placeholder="nama@email.com" required autocomplete="email"/>
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="label !mb-0" for="password">Password</label>
+            <a href="#" class="text-xs text-navy-700 hover:underline" id="forgot-link">Lupa password?</a>
+          </div>
+          <input type="password" id="password" name="password" class="input" placeholder="••••••••" required autocomplete="current-password"/>
+        </div>
+        <button type="submit" class="btn btn-primary w-full">
+          <span data-label>Masuk</span>
+          <svg data-loading class="hidden animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+        </button>
+      </form>
+
+      <p class="mt-8 text-sm text-center text-slate-600">
+        Belum punya akun?
+        <a href="/register.html" class="font-semibold text-navy-900 hover:text-gold-600 transition">Daftar di sini →</a>
+      </p>
+    </div>
+  </main>
+
+  <script type="module">
+    import { mountNavbar }   from '/src/components/navbar.js'; // not used here but ensures session if redirected
+    import { authService }   from '/src/services/auth.service.js';
+    import { toast }         from '/src/utils/toast.js';
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Redirect if already logged in
+    const session = await authService.getSession();
+    if (session) window.location.href = '/';
+
+    const form = document.getElementById('login-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.querySelector('[data-label]').textContent = 'Memproses...';
+      btn.querySelector('[data-loading]').classList.remove('hidden');
+      try {
+        await authService.login(form.email.value.trim(), form.password.value);
+        toast.success('Berhasil masuk! Mengarahkan...');
+        setTimeout(() => { window.location.href = '/'; }, 600);
+      } catch (err) {
+        toast.error(err.message || 'Gagal masuk. Periksa kembali kredensial.');
+        btn.disabled = false;
+        btn.querySelector('[data-label]').textContent = 'Masuk';
+        btn.querySelector('[data-loading]').classList.add('hidden');
+      }
+    });
+
+    document.getElementById('forgot-link').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const email = form.email.value.trim();
+      if (!email) { toast.warn('Isi email kamu dulu, ya.'); return; }
+      try {
+        await authService.forgotPassword(email);
+        toast.success('Tautan reset password telah dikirim ke email-mu.');
+      } catch (err) { toast.error(err.message); }
+    });
+  </script>
+</body>
+</html>

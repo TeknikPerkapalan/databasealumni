@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulir · Portal Alumni Perkapalan UNDIP</title>
+  <meta name="description" content="Formulir aktif untuk alumni — pendaftaran kegiatan, survey, dan lainnya." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="bg-[#fafbfc]">
+  <div id="navbar"></div>
+
+  <section class="bg-navy-950 text-white hero-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <p class="text-gold-400 text-sm font-medium tracking-wide uppercase">Formulir</p>
+      <h1 class="font-display font-semibold text-4xl sm:text-5xl mt-2">Formulir Online</h1>
+      <p class="mt-3 text-slate-300 max-w-2xl">Daftar acara, kirim survey, dan formulir lain yang dibuka oleh panitia.</p>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div id="form-grid" class="grid lg:grid-cols-3 md:grid-cols-2 gap-5"></div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script type="module" src="/src/pages/forms.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artikel · Admin · Portal Alumni Perkapalan UNDIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+
+  <!-- Quill -->
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.min.js"></script>
+
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="bg-[#f6f7f9]">
+  <div class="flex min-h-screen">
+    <aside id="admin-sidebar"></aside>
+
+    <main class="flex-1 lg:ml-64">
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+        <div class="px-6 lg:px-10 py-4 flex items-center justify-between">
+          <div>
+            <p class="text-xs text-slate-500">Konten</p>
+            <h1 id="page-h" class="font-display text-2xl font-semibold text-navy-950">Kelola Artikel</h1>
+          </div>
+          <button id="btn-new" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+            Tulis Artikel Baru
+          </button>
+        </div>
+      </header>
+
+      <!-- LIST VIEW -->
+      <section id="list-view" class="p-6 lg:p-10">
+        <div class="card overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-slate-50 text-slate-600 text-xs uppercase">
+              <tr>
+                <th class="text-left px-5 py-3 font-medium">Judul</th>
+                <th class="text-left px-5 py-3 font-medium hidden md:table-cell">Kategori</th>
+                <th class="text-left px-5 py-3 font-medium hidden md:table-cell">Penulis</th>
+                <th class="text-left px-5 py-3 font-medium">Status</th>
+                <th class="text-left px-5 py-3 font-medium hidden lg:table-cell">Tanggal</th>
+                <th class="px-5 py-3"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- EDITOR VIEW -->
+      <section id="editor-view" class="p-6 lg:p-10 hidden">
+        <button id="btn-back" class="btn btn-ghost text-sm mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          Kembali ke daftar
+        </button>
+
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 card p-6 space-y-4">
+            <input id="art-title" class="w-full text-3xl font-display font-semibold text-navy-950 placeholder-slate-300 focus:outline-none" placeholder="Judul artikel..." />
+            <input id="art-excerpt" class="input" placeholder="Ringkasan singkat (untuk preview di kartu)..." />
+            <div id="editor" class="min-h-[400px]"></div>
+          </div>
+
+          <aside class="space-y-4">
+            <div class="card p-5 space-y-4">
+              <h3 class="font-semibold text-navy-950">Publikasi</h3>
+              <div>
+                <label class="label">Status</label>
+                <select id="art-status" class="select">
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                </select>
+              </div>
+              <div>
+                <label class="label">Kategori</label>
+                <select id="art-category" class="select"></select>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex gap-2">
+                <button id="btn-save" class="btn btn-primary flex-1">Simpan</button>
+                <button id="btn-delete" class="btn btn-danger hidden">Hapus</button>
+              </div>
+            </div>
+
+            <div class="card p-5 space-y-3">
+              <h3 class="font-semibold text-navy-950">Thumbnail</h3>
+              <div id="thumb-preview" class="aspect-[16/10] rounded-lg bg-slate-100 grid place-items-center overflow-hidden">
+                <p class="text-xs text-slate-400">Belum ada gambar</p>
+              </div>
+              <label class="btn btn-outline w-full cursor-pointer">
+                Pilih gambar
+                <input id="thumb-input" type="file" accept="image/*" class="hidden" />
+              </label>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/src/pages/admin/articles.js"></script>
+</body>
+</html>

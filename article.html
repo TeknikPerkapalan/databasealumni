@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Artikel · Portal Alumni Perkapalan UNDIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="bg-[#fafbfc]">
+  <div id="navbar"></div>
+
+  <article id="article-root" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div id="loading" class="space-y-4 animate-pulse">
+      <div class="h-3 bg-slate-200 rounded w-1/4"></div>
+      <div class="h-10 bg-slate-200 rounded w-3/4"></div>
+      <div class="h-3 bg-slate-200 rounded w-1/2"></div>
+      <div class="aspect-[16/9] bg-slate-200 rounded-xl"></div>
+      <div class="space-y-2 mt-6">
+        <div class="h-3 bg-slate-200 rounded w-full"></div>
+        <div class="h-3 bg-slate-200 rounded w-11/12"></div>
+        <div class="h-3 bg-slate-200 rounded w-10/12"></div>
+      </div>
+    </div>
+  </article>
+
+  <div id="footer"></div>
+
+  <script type="module" src="/src/pages/article.js"></script>
+</body>
+</html>

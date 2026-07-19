@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kegiatan · Admin · Portal Alumni Perkapalan UNDIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="bg-[#f6f7f9]">
+  <div class="flex min-h-screen">
+    <aside id="admin-sidebar"></aside>
+
+    <main class="flex-1 lg:ml-64">
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+        <div class="px-6 lg:px-10 py-4 flex items-center justify-between">
+          <div>
+            <p class="text-xs text-slate-500">Komunitas</p>
+            <h1 class="font-display text-2xl font-semibold text-navy-950">Kelola Kegiatan</h1>
+          </div>
+          <button id="btn-new" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+            Kegiatan Baru
+          </button>
+        </div>
+      </header>
+
+      <section class="p-6 lg:p-10">
+        <div class="card overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-slate-50 text-slate-600 text-xs uppercase">
+              <tr>
+                <th class="text-left px-5 py-3 font-medium">Nama Kegiatan</th>
+                <th class="text-left px-5 py-3 font-medium hidden md:table-cell">Lokasi</th>
+                <th class="text-left px-5 py-3 font-medium">Mulai</th>
+                <th class="text-left px-5 py-3 font-medium hidden lg:table-cell">Selesai</th>
+                <th class="px-5 py-3"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-navy-950/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white">
+        <h2 id="modal-title" class="font-display text-xl font-semibold text-navy-950">Kegiatan Baru</h2>
+        <button id="modal-close" class="text-slate-400 hover:text-slate-700">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form id="form-event" class="p-6 space-y-4">
+        <input type="hidden" id="f-id" />
+        <div>
+          <label class="label">Nama Kegiatan <span class="text-rose-500">*</span></label>
+          <input id="f-title" required class="input" placeholder="Reuni Akbar Alumni 2026" />
+        </div>
+        <div>
+          <label class="label">Lokasi</label>
+          <input id="f-location" class="input" placeholder="Auditorium UNDIP / Online" />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="label">Tanggal Mulai <span class="text-rose-500">*</span></label>
+            <input id="f-start" type="datetime-local" required class="input" />
+          </div>
+          <div>
+            <label class="label">Tanggal Selesai</label>
+            <input id="f-end" type="datetime-local" class="input" />
+          </div>
+        </div>
+        <div>
+          <label class="label">Deskripsi</label>
+          <textarea id="f-description" rows="5" class="textarea" placeholder="Deskripsi kegiatan, rundown, kontak panitia..."></textarea>
+        </div>
+        <div>
+          <label class="label">Banner Kegiatan</label>
+          <input id="f-banner-file" type="file" accept="image/*" class="input" />
+          <div id="banner-preview" class="mt-2 hidden">
+            <img id="banner-img" class="h-32 rounded-lg object-cover border border-slate-200" />
+          </div>
+          <input type="hidden" id="f-banner-url" />
+        </div>
+        <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+          <button type="button" id="btn-cancel" class="btn btn-ghost">Batal</button>
+          <button type="submit" id="btn-save" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/pages/admin/events.js"></script>
+</body>
+</html>

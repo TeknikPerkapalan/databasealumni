@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lowongan · Admin · Portal Alumni Perkapalan UNDIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="bg-[#f6f7f9]">
+  <div class="flex min-h-screen">
+    <aside id="admin-sidebar"></aside>
+
+    <main class="flex-1 lg:ml-64">
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+        <div class="px-6 lg:px-10 py-4 flex items-center justify-between">
+          <div>
+            <p class="text-xs text-slate-500">Karir</p>
+            <h1 class="font-display text-2xl font-semibold text-navy-950">Kelola Lowongan Kerja</h1>
+          </div>
+          <button id="btn-new" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+            Lowongan Baru
+          </button>
+        </div>
+      </header>
+
+      <section class="p-6 lg:p-10">
+        <div class="card overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-slate-50 text-slate-600 text-xs uppercase">
+              <tr>
+                <th class="text-left px-5 py-3 font-medium">Posisi</th>
+                <th class="text-left px-5 py-3 font-medium hidden md:table-cell">Perusahaan</th>
+                <th class="text-left px-5 py-3 font-medium hidden lg:table-cell">Lokasi</th>
+                <th class="text-left px-5 py-3 font-medium">Tipe</th>
+                <th class="text-left px-5 py-3 font-medium hidden lg:table-cell">Deadline</th>
+                <th class="text-left px-5 py-3 font-medium">Status</th>
+                <th class="px-5 py-3"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-navy-950/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white">
+        <h2 id="modal-title" class="font-display text-xl font-semibold text-navy-950">Lowongan Baru</h2>
+        <button id="modal-close" class="text-slate-400 hover:text-slate-700">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form id="form-job" class="p-6 space-y-4">
+        <input type="hidden" id="f-id" />
+        <div>
+          <label class="label">Posisi <span class="text-rose-500">*</span></label>
+          <input id="f-title" required class="input" placeholder="Naval Architect, Marine Engineer, dst." />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="label">Perusahaan <span class="text-rose-500">*</span></label>
+            <input id="f-company" required class="input" />
+          </div>
+          <div>
+            <label class="label">Lokasi</label>
+            <input id="f-location" class="input" placeholder="Surabaya, Indonesia" />
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="label">Tipe Pekerjaan</label>
+            <select id="f-type" class="select">
+              <option value="full_time">Full Time</option>
+              <option value="part_time">Part Time</option>
+              <option value="contract">Kontrak</option>
+              <option value="internship">Magang</option>
+              <option value="freelance">Freelance</option>
+            </select>
+          </div>
+          <div>
+            <label class="label">Deadline</label>
+            <input id="f-deadline" type="date" class="input" />
+          </div>
+        </div>
+        <div>
+          <label class="label">Deskripsi <span class="text-rose-500">*</span></label>
+          <textarea id="f-description" required rows="6" class="textarea" placeholder="Deskripsi pekerjaan, kualifikasi, benefit..."></textarea>
+        </div>
+        <div>
+          <label class="label">Link Apply</label>
+          <input id="f-apply-url" type="url" class="input" placeholder="https://..." />
+        </div>
+        <div class="flex items-center gap-2 pt-2">
+          <input id="f-active" type="checkbox" checked class="w-4 h-4 accent-navy-900" />
+          <label for="f-active" class="text-sm text-slate-700">Aktif (tampilkan di portal)</label>
+        </div>
+        <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+          <button type="button" id="btn-cancel" class="btn btn-ghost">Batal</button>
+          <button type="submit" id="btn-save" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/pages/admin/jobs.js"></script>
+</body>
+</html>

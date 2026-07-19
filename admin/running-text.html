@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Text · Admin · Portal Alumni Perkapalan UNDIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="bg-[#f6f7f9]">
+  <div class="flex min-h-screen">
+    <aside id="admin-sidebar"></aside>
+
+    <main class="flex-1 lg:ml-64">
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+        <div class="px-6 lg:px-10 py-4 flex items-center justify-between">
+          <div>
+            <p class="text-xs text-slate-500">Pengumuman</p>
+            <h1 class="font-display text-2xl font-semibold text-navy-950">Running Text</h1>
+          </div>
+          <button id="btn-new" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+            Tambah Pesan
+          </button>
+        </div>
+      </header>
+
+      <section class="p-6 lg:p-10 space-y-6">
+        <div class="card p-5">
+          <div class="flex items-start gap-3 text-sm text-slate-600">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-navy-700 flex-none mt-0.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <p>Pesan-pesan yang aktif akan ditampilkan secara berurutan pada marquee di bagian atas landing page. Atur urutan tampil dengan kolom Order.</p>
+          </div>
+        </div>
+
+        <div class="card overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-slate-50 text-slate-600 text-xs uppercase">
+              <tr>
+                <th class="text-left px-5 py-3 font-medium w-20">Order</th>
+                <th class="text-left px-5 py-3 font-medium">Pesan</th>
+                <th class="text-left px-5 py-3 font-medium hidden md:table-cell">Status</th>
+                <th class="px-5 py-3"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-navy-950/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+        <h2 id="modal-title" class="font-display text-xl font-semibold text-navy-950">Tambah Pesan</h2>
+        <button id="modal-close" class="text-slate-400 hover:text-slate-700">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form id="form-rt" class="p-6 space-y-4">
+        <input type="hidden" id="f-id" />
+        <div>
+          <label class="label">Pesan <span class="text-rose-500">*</span></label>
+          <textarea id="f-message" required rows="3" class="textarea" placeholder="Contoh: Reuni Akbar Alumni akan dilaksanakan pada bulan Agustus 2026"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="label">Order Index</label>
+            <input id="f-order" type="number" min="0" value="0" class="input" />
+            <p class="text-xs text-slate-500 mt-1">Angka kecil tampil lebih dulu</p>
+          </div>
+          <div class="flex items-end">
+            <label class="flex items-center gap-2 pb-2">
+              <input id="f-active" type="checkbox" checked class="w-4 h-4 accent-navy-900" />
+              <span class="text-sm text-slate-700">Aktif</span>
+            </label>
+          </div>
+        </div>
+        <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+          <button type="button" id="btn-cancel" class="btn btn-ghost">Batal</button>
+          <button type="submit" id="btn-save" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/pages/admin/running-text.js"></script>
+</body>
+</html>

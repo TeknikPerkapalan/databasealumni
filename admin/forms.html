@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulir · Admin · Portal Alumni Perkapalan UNDIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/src/config/tailwind.js"></script>
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <script src="/env.js" onerror=""></script>
+</head>
+<body class="bg-[#f6f7f9]">
+  <div class="flex min-h-screen">
+    <aside id="admin-sidebar"></aside>
+
+    <main class="flex-1 lg:ml-64">
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+        <div class="px-6 lg:px-10 py-4 flex items-center justify-between">
+          <div>
+            <p class="text-xs text-slate-500" id="crumb">Formulir</p>
+            <h1 id="page-h" class="font-display text-2xl font-semibold text-navy-950">Kelola Formulir</h1>
+          </div>
+          <div id="hdr-actions">
+            <button id="btn-new" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+              Formulir Baru
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- LIST VIEW -->
+      <section id="list-view" class="p-6 lg:p-10">
+        <div id="forms-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </section>
+
+      <!-- BUILDER VIEW -->
+      <section id="builder-view" class="p-6 lg:p-10 hidden space-y-6">
+        <button id="back-list" class="text-sm text-slate-600 hover:text-navy-900 flex items-center gap-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          Kembali ke daftar
+        </button>
+
+        <div class="grid lg:grid-cols-3 gap-6">
+          <!-- Form meta -->
+          <div class="lg:col-span-1 space-y-5">
+            <div class="card p-6 space-y-3">
+              <h3 class="font-display text-lg font-semibold text-navy-950">Pengaturan</h3>
+              <div>
+                <label class="label">Judul</label>
+                <input id="m-title" class="input" />
+              </div>
+              <div>
+                <label class="label">Deskripsi</label>
+                <textarea id="m-desc" rows="3" class="textarea"></textarea>
+              </div>
+              <div class="flex items-center gap-2">
+                <input id="m-active" type="checkbox" class="w-4 h-4 accent-navy-900" />
+                <label for="m-active" class="text-sm text-slate-700">Aktif</label>
+              </div>
+              <div class="pt-3 border-t border-slate-200 flex flex-wrap gap-2">
+                <button id="btn-save-meta" class="btn btn-primary flex-1">Simpan Pengaturan</button>
+                <button id="btn-view-sub" class="btn btn-outline">Hasil Submission</button>
+                <button id="btn-delete-form" class="btn btn-danger">Hapus</button>
+              </div>
+              <p class="text-xs text-slate-500 break-all" id="m-slug"></p>
+            </div>
+          </div>
+
+          <!-- Fields builder -->
+          <div class="lg:col-span-2 space-y-5">
+            <div class="card p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-display text-lg font-semibold text-navy-950">Field Formulir</h3>
+                <button id="btn-add-field" class="btn btn-gold text-sm">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+                  Tambah Field
+                </button>
+              </div>
+              <div id="fields-list" class="space-y-3"></div>
+              <p id="fields-empty" class="text-center text-slate-400 text-sm py-8 hidden">Belum ada field. Klik "Tambah Field" untuk memulai.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUBMISSIONS VIEW -->
+      <section id="submissions-view" class="p-6 lg:p-10 hidden space-y-6">
+        <button id="back-builder" class="text-sm text-slate-600 hover:text-navy-900 flex items-center gap-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          Kembali ke builder
+        </button>
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm min-w-[700px]">
+              <thead class="bg-slate-50 text-slate-600 text-xs uppercase">
+                <tr id="sub-head"></tr>
+              </thead>
+              <tbody id="sub-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- New Form modal -->
+  <div id="modal-new" class="fixed inset-0 bg-navy-950/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+        <h2 class="font-display text-xl font-semibold text-navy-950">Formulir Baru</h2>
+        <button id="modal-new-close" class="text-slate-400 hover:text-slate-700">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form id="form-new" class="p-6 space-y-4">
+        <div>
+          <label class="label">Judul <span class="text-rose-500">*</span></label>
+          <input id="n-title" required class="input" placeholder="Reuni Akbar 2026" />
+        </div>
+        <div>
+          <label class="label">Deskripsi</label>
+          <textarea id="n-desc" rows="3" class="textarea"></textarea>
+        </div>
+        <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+          <button type="button" id="btn-new-cancel" class="btn btn-ghost">Batal</button>
+          <button type="submit" class="btn btn-primary">Buat & Lanjut Edit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Field editor modal -->
+  <div id="modal-field" class="fixed inset-0 bg-navy-950/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white">
+        <h2 id="field-modal-title" class="font-display text-xl font-semibold text-navy-950">Tambah Field</h2>
+        <button id="modal-field-close" class="text-slate-400 hover:text-slate-700">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form id="form-field" class="p-6 space-y-4">
+        <input type="hidden" id="fld-id" />
+        <div>
+          <label class="label">Label <span class="text-rose-500">*</span></label>
+          <input id="fld-label" required class="input" placeholder="Nama Lengkap" />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="label">Tipe Field</label>
+            <select id="fld-type" class="select">
+              <option value="text">Text Singkat</option>
+              <option value="textarea">Text Panjang</option>
+              <option value="select">Dropdown</option>
+              <option value="radio">Radio (pilih satu)</option>
+              <option value="checkbox">Checkbox (multi)</option>
+              <option value="date">Tanggal</option>
+              <option value="file">Upload File</option>
+            </select>
+          </div>
+          <div>
+            <label class="label">Order Index</label>
+            <input id="fld-order" type="number" min="0" value="0" class="input" />
+          </div>
+        </div>
+        <div>
+          <label class="label">Placeholder / Hint</label>
+          <input id="fld-placeholder" class="input" placeholder="Contoh: Nama sesuai ijazah" />
+        </div>
+        <div id="opts-wrap">
+          <label class="label">Pilihan (satu per baris)</label>
+          <textarea id="fld-options" rows="4" class="textarea" placeholder="Hadir&#10;Tidak hadir&#10;Mungkin"></textarea>
+          <p class="text-xs text-slate-500 mt-1">Khusus untuk select/radio/checkbox.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input id="fld-required" type="checkbox" class="w-4 h-4 accent-navy-900" />
+          <label for="fld-required" class="text-sm text-slate-700">Wajib diisi</label>
+        </div>
+        <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+          <button type="button" id="btn-field-cancel" class="btn btn-ghost">Batal</button>
+          <button type="submit" id="btn-field-save" class="btn btn-primary">Simpan Field</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/pages/admin/forms.js"></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+/* ============================================================================
+   PORTAL ALUMNI TP UNDIP — DESIGN SYSTEM
+   Aesthetic: Navy maritime, gold accents, refined editorial typography.
+   Inspired by LinkedIn × Notion × Medium — clean, professional, elegant.
+   ============================================================================ */
+
+/* ---------- Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand palette */
+  --color-navy-50:  #f1f5fa;
+  --color-navy-100: #dde7f1;
+  --color-navy-200: #b8cce0;
+  --color-navy-300: #7fa3c4;
+  --color-navy-400: #4977a3;
+  --color-navy-500: #2c5a8c;
+  --color-navy-600: #1f4570;
+  --color-navy-700: #1a3a5f;
+  --color-navy-800: #142e4d;
+  --color-navy-900: #0e2240;
+  --color-navy-950: #07172d;
+
+  --color-gold-200: #f6e5a8;
+  --color-gold-300: #efd47e;
+  --color-gold-400: #e6c155;
+  --color-gold-500: #d4af37;   /* signature */
+  --color-gold-600: #b8932a;
+  --color-gold-700: #8c6f1f;
+
+  /* Typography */
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+html, body {
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv01", "cv02";
+  background: #fafbfc;
+  color: var(--color-navy-900);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+.font-display { font-family: var(--font-display); letter-spacing: -0.015em; }
+.font-display-italic { font-family: var(--font-display); font-style: italic; }
+
+/* ---------- Nav links ---------- */
+.nav-link {
+  display: inline-flex; align-items: center;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.875rem; font-weight: 500;
+  color: var(--color-navy-800);
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+.nav-link:hover { background: rgba(20, 46, 77, 0.06); color: var(--color-navy-900); }
+.nav-link-active {
+  background: var(--color-navy-900); color: white !important;
+  box-shadow: 0 2px 8px -2px rgba(14, 34, 64, 0.4);
+}
+.nav-link-active:hover { background: var(--color-navy-700); }
+
+.menu-item {
+  display: block;
+  padding: 0.55rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-navy-800);
+  transition: background 0.15s;
+}
+.menu-item:hover { background: var(--color-navy-50); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  font-weight: 600; font-size: 0.9rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary  { background: var(--color-navy-900); color: white; box-shadow: 0 4px 14px -4px rgba(14,34,64,0.4); }
+.btn-primary:hover { background: var(--color-navy-700); transform: translateY(-1px); box-shadow: 0 6px 20px -4px rgba(14,34,64,0.5); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.btn-gold     { background: var(--color-gold-500); color: var(--color-navy-950); box-shadow: 0 4px 14px -4px rgba(212,175,55,0.5); }
+.btn-gold:hover { background: var(--color-gold-400); transform: translateY(-1px); }
+.btn-outline  { background: white; color: var(--color-navy-900); border: 1.5px solid var(--color-navy-200); }
+.btn-outline:hover { border-color: var(--color-navy-900); }
+.btn-ghost    { background: transparent; color: var(--color-navy-900); }
+.btn-ghost:hover { background: rgba(20,46,77,0.06); }
+.btn-danger   { background: #e11d48; color: white; }
+.btn-danger:hover { background: #be123c; }
+.btn-sm { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
+
+/* ---------- Inputs ---------- */
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  font-size: 0.9rem;
+  color: var(--color-navy-900);
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.75rem;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--color-navy-500);
+  box-shadow: 0 0 0 4px rgba(44, 90, 140, 0.12);
+}
+.input::placeholder, .textarea::placeholder { color: #94a3b8; }
+.label {
+  display: block;
+  font-size: 0.825rem; font-weight: 500;
+  color: var(--color-navy-800);
+  margin-bottom: 0.4rem;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: white;
+  border: 1px solid #eef2f7;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(14, 34, 64, 0.18);
+  border-color: #dbe4ee;
+}
+
+/* ---------- Colour utilities ----------
+   navy-*/gold-* utilities + all variants (hover/focus/responsive) now come
+   from the shared Tailwind config in /src/config/tailwind.js. Only keep here
+   the handful that must exist even if that script is unavailable. */
+.shadow-soft { box-shadow: 0 1px 3px rgba(15,23,42,0.04), 0 12px 30px -12px rgba(14,34,64,0.14); }
+
+/* ---------- Decorative hero background ---------- */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(212,175,55,0.18) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 100% 100%, rgba(44,90,140,0.4) 0%, transparent 50%),
+    linear-gradient(135deg, #07172d 0%, #142e4d 60%, #1f4570 100%);
+}
+
+.hero-grid::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  pointer-events: none;
+}
+
+/* Decorative wave svg overlay - used at bottom of hero */
+.wave-divider {
+  position: absolute;
+  bottom: -1px; left: 0; width: 100%;
+  pointer-events: none;
+}
+
+/* ---------- Marquee (running text) ---------- */
+.marquee {
+  overflow: hidden;
+  display: flex;
+  white-space: nowrap;
+  mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+}
+.marquee__track {
+  display: inline-flex;
+  gap: 4rem;
+  padding-right: 4rem;
+  animation: marquee 35s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+/* ---------- Skeleton loader ---------- */
+.skeleton {
+  background: linear-gradient(110deg, #eceff3 8%, #f5f7fa 18%, #eceff3 33%);
+  background-size: 200% 100%;
+  animation: shine 1.5s linear infinite;
+  border-radius: 0.5rem;
+}
+@keyframes shine {
+  to { background-position-x: -200%; }
+}
+
+/* ---------- Reveal-on-load animations ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: reveal-up 0.7s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.reveal-delay-1 { animation-delay: 0.08s; }
+.reveal-delay-2 { animation-delay: 0.16s; }
+.reveal-delay-3 { animation-delay: 0.24s; }
+.reveal-delay-4 { animation-delay: 0.32s; }
+@keyframes reveal-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Badge ---------- */
+.badge {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.7rem; font-weight: 600;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.badge-gold  { background: #fbf3d4; color: var(--color-gold-700); }
+.badge-navy  { background: var(--color-navy-50); color: var(--color-navy-700); }
+.badge-green { background: #d1fae5; color: #047857; }
+.badge-red   { background: #fee2e2; color: #b91c1c; }
+.badge-gray  { background: #f1f5f9; color: #475569; }
+
+/* ---------- Quill overrides (subtle clean look) ---------- */
+.ql-toolbar.ql-snow {
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 0.75rem 0.75rem 0 0;
+  background: #f8fafc;
+}
+.ql-container.ql-snow {
+  border: 1.5px solid #e2e8f0 !important;
+  border-top: 0 !important;
+  border-radius: 0 0 0.75rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  min-height: 320px;
+}
+.ql-editor { min-height: 320px; }
+
+/* ---------- Article prose ---------- */
+.prose-article {
+  font-size: 1.075rem;
+  line-height: 1.75;
+  color: #334155;
+}
+.prose-article h1, .prose-article h2, .prose-article h3 {
+  font-family: var(--font-display);
+  color: var(--color-navy-900);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-top: 2em; margin-bottom: 0.6em;
+}
+.prose-article h1 { font-size: 2rem; }
+.prose-article h2 { font-size: 1.5rem; }
+.prose-article h3 { font-size: 1.25rem; }
+.prose-article p   { margin: 1em 0; }
+.prose-article a   { color: var(--color-navy-700); text-decoration: underline; text-underline-offset: 3px; }
+.prose-article img { border-radius: 0.75rem; margin: 1.5em 0; }
+.prose-article blockquote {
+  border-left: 4px solid var(--color-gold-500);
+  padding: 0.4em 1.2em;
+  margin: 1.5em 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2em;
+  color: var(--color-navy-800);
+}
+.prose-article ul, .prose-article ol { padding-left: 1.5em; }
+.prose-article code {
+  background: #f1f5f9; padding: 0.15em 0.4em; border-radius: 4px;
+  font-size: 0.9em; color: var(--color-navy-800);
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(7,23,45,0.94);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 9000;
+  padding: 2rem;
+}
+.lightbox.is-open { display: flex; }
+.lightbox img {
+  max-width: 92vw; max-height: 90vh;
+  border-radius: 0.75rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+}
+
+/* ---------- Masonry helper for gallery ---------- */
+.masonry { column-gap: 1rem; }
+.masonry > * { break-inside: avoid; margin-bottom: 1rem; }
+@media (min-width: 640px)  { .masonry { column-count: 2; } }
+@media (min-width: 1024px) { .masonry { column-count: 3; } }
+@media (min-width: 1280px) { .masonry { column-count: 4; } }
+
+/* Smooth scrollbar in admin */
+.thin-scroll::-webkit-scrollbar       { width: 8px; height: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.thin-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
